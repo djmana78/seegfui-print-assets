@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="360" height="470" viewBox="0 0 360 470">
+  <!-- Seegfui · frischer Mundart-Spruch "Am liabsten am See" (KW26, SEE-101)
+       Linsen: Copywriting (emotionale Wahrheit Sehnsucht/Vorliebe, bairisch "liabsten"),
+       Bairische Authentizitaet, Visuelle Hierarchie (AM SEE dominant), Minimalismus & Weissraum,
+       Farb-CI-Treue (Tinte #1d1c19 / Signatur see-blau #2f6f9e), 1-Color-druckbar.
+       Tone: hell = dunkle Tinte auf hellem Textil. -->
+  <!-- Seeumriss als ruhiger Tonwert TIEF im Hintergrund (Deckkraft 0.25), unter dem Text -->
+  <path d="M96,360 C96,332 134,322 172,326 C206,329 236,312 264,326 C286,337 278,372 258,386
+           C234,403 206,392 176,397 C140,403 96,396 96,360 Z"
+        fill="none" stroke="#2f6f9e" stroke-width="2" stroke-linejoin="round" opacity="0.25"/>
+  <!-- Zeile 1: leichte Hand-/Script-Anmutung (kursiv, sekundaer) -->
+  <text x="180" y="206" text-anchor="middle"
+        font-family="'Liberation Sans','FreeSans',sans-serif" font-style="italic"
+        font-weight="400" font-size="38" letter-spacing="0.5" fill="#1d1c19">am liabsten</text>
+  <!-- Zeile 2: moderne Sans, dominant (Fokus) -->
+  <text x="180" y="278" text-anchor="middle"
+        font-family="'Liberation Sans','FreeSans',sans-serif"
+        font-weight="700" font-size="80" letter-spacing="6" fill="#1d1c19">AM SEE</text>
+  <!-- Wellen-Signatur in See-Blau, ruhig unter dem Fokuswort -->
+  <path d="M120,308 q15,-11 30,0 t30,0 t30,0 t30,0"
+        fill="none" stroke="#2f6f9e" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
