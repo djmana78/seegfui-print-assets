@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1380" height="2040" viewBox="0 0 230 340">
+<path d="M26.6,15.6 L23.3,9.6 L24.9,5.6 L23.4,3 L19.7,2.1 L14.4,7 L13.1,5.4 L11.2,5.8 L9.4,2 L6.3,1.2 L1.8,-9.1 L-2.9,-41.5 L3.9,-62.7 L2.4,-72.7 L0.6,-75 L-4.9,-74.9 L-12.4,-67.5 L-16.6,-67.1 L-22,-57.2 L-21.6,-53 L-24.3,-47.3 L-23.7,-41.3 L-25.6,-36.4 L-24.6,-30.6 L-25.8,-26.6 L-23.8,-21.8 L-26.6,-12.8 L-26,-9.3 L-22.8,-5.3 L-25.1,0.3 L-23.1,20.5 L-24.3,26.8 L-20.4,36.9 L-20.7,40.6 L-16.7,48.4 L-18.3,54.5 L-17.2,59.2 L-12,60.7 L-10.4,65.3 L-7.5,69.5 L-3,73.5 L2,75 L7,73 L10.5,69.5 L12.3,66.1 L11.7,33.9 L16.2,25.7 L26.6,16.1 Z" fill="none" stroke="#2f6f9e" stroke-opacity="0.16" stroke-width="0.9" stroke-linejoin="round" stroke-linecap="round" transform="translate(115 175) scale(2.05)"/>
+<text x="115" y="142.0" text-anchor="middle" font-family="FreeSans" font-weight="bold" font-size="56.0" fill="#1d1c19" letter-spacing="-1.2">stad</text>
+<text x="115" y="188.0" text-anchor="middle" font-family="FreeSans" font-weight="bold" font-size="37.3" fill="#1d1c19" letter-spacing="-1.2">am Wasser</text>
+<rect x="93" y="206.0" width="44" height="2.4" rx="1.2" fill="#2f6f9e"/>
+<text x="115" y="230.0" text-anchor="middle" font-family="Liberation Serif" font-style="italic" font-size="16" fill="#2f6f9e">einfach staad sein</text>
+<g transform="translate(115,246.0) scale(0.7)"><path d="M0,3 C0,-3 -9,-6 -9,-13 C-9,-19 -2,-20 0,-14 C2,-20 9,-19 9,-13 C9,-6 0,-3 0,3 Z" fill="#d23b34"/></g>
+<text x="115" y="312" text-anchor="middle" font-family="FreeSans" font-size="10" letter-spacing="4" fill="#2f6f9e">SEEGFUI</text>
+</svg>
