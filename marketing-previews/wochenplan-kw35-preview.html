@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Seegfui Wochenplan KW35 – 24.–30. Aug 2026</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #f5f5f0; color: #1a1a1a; }
+  header { background: #1a3a4a; color: #fff; padding: 24px 32px; }
+  header h1 { font-size: 1.5rem; font-weight: 700; }
+  header p { font-size: 0.9rem; opacity: 0.75; margin-top: 4px; }
+  .badge { display: inline-block; font-size: 0.7rem; font-weight: 700; letter-spacing: 0.05em; padding: 2px 8px; border-radius: 4px; margin-left: 8px; vertical-align: middle; }
+  .badge-pending { background: #e2a000; color: #fff; }
+  .badge-live { background: #1a7a3a; color: #fff; }
+  .badge-done { background: #555; color: #fff; }
+  .container { max-width: 900px; margin: 0 auto; padding: 24px 16px; }
+  .week-bar { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 24px; }
+  .day { flex: 1; min-width: 100px; text-align: center; padding: 8px 4px; border-radius: 6px; font-size: 0.75rem; font-weight: 600; background: #e8e8e4; }
+  .day.post-day { background: #1a3a4a; color: #fff; }
+  .day .label { font-size: 0.65rem; opacity: 0.7; margin-top: 2px; }
+  .section-title { font-size: 0.7rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #888; margin: 24px 0 12px; }
+  .card { background: #fff; border-radius: 10px; box-shadow: 0 1px 4px rgba(0,0,0,0.08); margin-bottom: 16px; overflow: hidden; }
+  .card-header { padding: 14px 18px 10px; border-bottom: 1px solid #f0f0ec; display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap; }
+  .card-header .slot { font-size: 0.85rem; font-weight: 700; color: #1a3a4a; }
+  .card-header .channels { font-size: 0.75rem; color: #888; }
+  .card-body { display: flex; gap: 0; }
+  .card-visual { width: 160px; min-height: 160px; flex-shrink: 0; background: #e8e8e4; display: flex; align-items: center; justify-content: center; }
+  .card-visual .placeholder { text-align: center; padding: 12px; color: #aaa; font-size: 0.75rem; }
+  .card-visual .placeholder .icon { font-size: 2rem; display: block; margin-bottom: 6px; }
+  .card-content { padding: 14px 18px; flex: 1; }
+  .card-content h3 { font-size: 0.9rem; font-weight: 700; margin-bottom: 8px; }
+  .caption-block { background: #f8f8f5; border-left: 3px solid #1a3a4a; padding: 10px 12px; font-size: 0.82rem; line-height: 1.55; white-space: pre-wrap; border-radius: 0 4px 4px 0; margin-bottom: 8px; }
+  .utm { font-size: 0.7rem; color: #888; word-break: break-all; margin-bottom: 4px; }
+  .guardrails { font-size: 0.72rem; color: #1a7a3a; margin-top: 6px; }
+  .guardrails span { background: #e8f5ec; padding: 2px 6px; border-radius: 3px; margin-right: 4px; display: inline-block; margin-bottom: 2px; }
+  .dep { font-size: 0.72rem; color: #e2a000; margin-top: 4px; }
+  .ads-card { background: #fff; border-radius: 10px; box-shadow: 0 1px 4px rgba(0,0,0,0.08); padding: 18px; margin-bottom: 16px; }
+  .ads-card h3 { font-size: 0.95rem; font-weight: 700; margin-bottom: 10px; }
+  .ads-table { width: 100%; border-collapse: collapse; font-size: 0.8rem; }
+  .ads-table th { background: #f5f5f0; padding: 6px 10px; text-align: left; font-weight: 600; border-bottom: 2px solid #e0e0d8; }
+  .ads-table td { padding: 6px 10px; border-bottom: 1px solid #f0f0ec; }
+  .budget-summary { margin-top: 12px; font-size: 0.82rem; background: #f8f8f5; border-radius: 6px; padding: 10px 12px; }
+  .budget-summary strong { color: #1a3a4a; }
+  .kpi-block { font-size: 0.78rem; color: #666; margin-top: 8px; line-height: 1.5; }
+  footer { text-align: center; padding: 24px; color: #aaa; font-size: 0.75rem; }
+  .guard-warn { background: #fff8e8; border: 1px solid #f0c040; border-radius: 6px; padding: 10px 14px; font-size: 0.78rem; color: #7a5a00; margin-bottom: 16px; }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>Seegfui — Wochenplan KW35 <span class="badge badge-pending">Ausstehend — Freigabe erbeten</span></h1>
+  <p>24.–30. August 2026 · Board-Gate SEE-5131 · Konvention SEE-4454</p>
+</header>
+
+<div class="container">
+
+  <div class="guard-warn">
+    ⚠️ <strong>Kein Post ohne akzeptierte Freigabe.</strong> Bitte diesen Plan freigeben oder Änderungswunsch als Kommentar hinterlassen.
+  </div>
+
+  <!-- Week bar -->
+  <div class="week-bar">
+    <div class="day post-day">Mo 24.08<div class="label">P1 · 18:30</div></div>
+    <div class="day">Di 25.08<div class="label">—</div></div>
+    <div class="day post-day">Mi 26.08<div class="label">P2 · 18:30</div></div>
+    <div class="day">Do 27.08<div class="label">—</div></div>
+    <div class="day post-day">Fr 28.08<div class="label">P3 · 18:30</div></div>
+    <div class="day post-day">Sa 29.08<div class="label">P4 · 11:00</div></div>
+    <div class="day">So 30.08<div class="label">—</div></div>
+  </div>
+
+  <div class="section-title">Organische Posts</div>
+
+  <!-- P1 -->
+  <div class="card">
+    <div class="card-header">
+      <span class="slot">P1 · Mo 24.08. · 18:30</span>
+      <span class="channels">📘 FB &amp; 📸 IG · Feed-Foto</span>
+      <span class="badge badge-pending">Ausstehend</span>
+    </div>
+    <div class="card-body">
+      <div class="card-visual">
+        <div class="placeholder">
+          <span class="icon">👕</span>
+          Sprüche-T-Shirt<br>Printful-Mockup<br>(CTO beschaffen)
+        </div>
+      </div>
+      <div class="card-content">
+        <h3>Sprüche-T-Shirt — Launch-Highlight</h3>
+        <div class="caption-block">Wann der See ruaft, trägst du ihn halt mit. 🌊
+
+Unser Sprüche-Shirt trägt deinen Lieblingsspruch überm Herzen — ob "Liab zum Ammersee", "Griass di vom Tegernsee" oder "Dahoam am Starnberger See".
+
+8 Sprüche, 3 Seen, 1 Shirt. Angenehm zu tragen, weich, hochwertig.
+Erst wenn du bestellst, wird druckt — kein Lager, kein Überschuss.
+
+👉 seegfui.de/shop</div>
+        <div class="utm">FB: utm_source=facebook&amp;utm_medium=post&amp;utm_campaign=sprueche-shirt&amp;utm_content=launch-highlight</div>
+        <div class="utm">IG: utm_source=instagram&amp;utm_medium=post&amp;utm_campaign=sprueche-shirt&amp;utm_content=launch-highlight</div>
+        <div class="guardrails"><span>✓ kein Bio/Öko</span><span>✓ "angenehm zu tragen" statt "bio"</span><span>✓ on-demand Fakt</span></div>
+        <div class="dep">⚡ Abhängigkeit: Printful-Mockup (STTU169, z.B. Ammersee See-Blau) — CTO beschaffen vor Mo 24.08.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- P2 -->
+  <div class="card">
+    <div class="card-header">
+      <span class="slot">P2 · Mi 26.08. · 18:30</span>
+      <span class="channels">📘 FB &amp; 📸 IG · Feed-Foto</span>
+      <span class="badge badge-pending">Ausstehend</span>
+    </div>
+    <div class="card-body">
+      <div class="card-visual">
+        <div class="placeholder">
+          <span class="icon">🧥</span>
+          Seehnsucht-Hoodie<br>Starnberger See<br>Printful-Mockup
+        </div>
+      </div>
+      <div class="card-content">
+        <h3>Seehnsucht Hoodie — Starnberger See</h3>
+        <div class="caption-block">Starnberger See. Sechs Meter tief einatmen. Schultern runter. Ankommen. 💙
+
+Wennst ned am See bist — dann halt den See im Herzen. Und überm Herzen.
+
+Unser Seehnsucht-Hoodie: weich, warm, deins.
+
+👉 seegfui.de/hoodies</div>
+        <div class="utm">FB: utm_source=facebook&amp;utm_medium=post&amp;utm_campaign=hoodie-fokus&amp;utm_content=starnberger-see</div>
+        <div class="utm">IG: utm_source=instagram&amp;utm_medium=post&amp;utm_campaign=hoodie-fokus&amp;utm_content=starnberger-see</div>
+        <div class="guardrails"><span>✓ kein Bio/Öko</span><span>✓ Bairisch/Heimat-Ton</span><span>✓ Kein KI-Bild (Printful-Mockup)</span></div>
+        <div class="dep">⚡ Abhängigkeit: Mockup M2580 Starnberger See — CTO beschaffen vor Mi 26.08.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- P3 -->
+  <div class="card">
+    <div class="card-header">
+      <span class="slot">P3 · Fr 28.08. · 18:30</span>
+      <span class="channels">📘 FB &amp; 📸 IG · Feed-Foto</span>
+      <span class="badge badge-pending">Ausstehend</span>
+    </div>
+    <div class="card-body">
+      <div class="card-visual">
+        <div class="placeholder">
+          <span class="icon">🌊</span>
+          3-Seen-Collage<br>oder Hoodie-Flat<br>(3 Motive)
+        </div>
+      </div>
+      <div class="card-content">
+        <h3>Alle 3 Seen — Kollektion-Überblick</h3>
+        <div class="caption-block">Ammersee. Starnberger See. Tegernsee.
+
+Drei Seen. Drei Drucke. Ein Versprechen: dein See kommt mit — überallhin. 🌊
+
+Hoodies, T-Shirts, Tassen — für jeden See der richtige Ausdruck.
+Erst wenn du bestellst, wird druckt.
+
+👉 seegfui.de</div>
+        <div class="utm">FB: utm_source=facebook&amp;utm_medium=post&amp;utm_campaign=kollektion-ueberblick&amp;utm_content=drei-seen</div>
+        <div class="utm">IG: utm_source=instagram&amp;utm_medium=post&amp;utm_campaign=kollektion-ueberblick&amp;utm_content=drei-seen</div>
+        <div class="guardrails"><span>✓ kein Bio/Öko</span><span>✓ Alle 3 Seen gleichwertig</span><span>✓ on-demand Fakt</span></div>
+        <div class="dep">⚡ Abhängigkeit: 3-Seen-Collage oder Flat-Layout — KreativAgent/CTO. Alternativ: 3 Einzelmockups nebeneinander.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- P4 -->
+  <div class="card">
+    <div class="card-header">
+      <span class="slot">P4 · Sa 29.08. · 11:00</span>
+      <span class="channels">📘 FB &amp; 📸 IG · Feed-Foto</span>
+      <span class="badge badge-pending">Ausstehend</span>
+    </div>
+    <div class="card-body">
+      <div class="card-visual">
+        <div class="placeholder">
+          <span class="icon">⛵</span>
+          Tegernsee-Motiv<br>oder Atmo-Foto<br>(wenn vorhanden)
+        </div>
+      </div>
+      <div class="card-content">
+        <h3>Tegernsee-Fokus — emotionaler Hero</h3>
+        <div class="caption-block">Am Tegernsee gibt's koa Wenn und koa Aber — nur den See. ⛵
+
+Für olle, denen der Tegernsee mehr ist ois bloß a Ausflugsziel. Die ihn kennen, wann er im Herbst d'Farbe wechselt und im Sommer d'Leut trägt.
+
+Dein See. Dein Druck.
+
+👉 seegfui.de/tegernsee</div>
+        <div class="utm">FB: utm_source=facebook&amp;utm_medium=post&amp;utm_campaign=see-sommer&amp;utm_content=tegernsee-hero</div>
+        <div class="utm">IG: utm_source=instagram&amp;utm_medium=post&amp;utm_campaign=see-sommer&amp;utm_content=tegernsee-hero</div>
+        <div class="guardrails"><span>✓ kein Bio/Öko</span><span>✓ Bairisch/Heimat-Ton</span></div>
+        <div class="dep">⚡ Abhängigkeit: Tegernsee-Atmo oder Hoodie-Mockup — CTO/KreativAgent vor Sa 29.08.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Ads -->
+  <div class="section-title">Bezahlte Ads</div>
+
+  <div class="ads-card">
+    <h3>Meta Ads — SEE-4330 Seegfui-Sales-Regional <span class="badge badge-pending">Freigabe erbeten</span></h3>
+    <p style="font-size:0.8rem;color:#666;margin-bottom:12px;">KW34-Laufzeit endet So 23.08. 23:59 — für KW35 Verlängerung/Neustart nötig.</p>
+
+    <table class="ads-table">
+      <thead>
+        <tr>
+          <th>AdSet</th>
+          <th>Budget</th>
+          <th>Targeting</th>
+          <th>Status KW35</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Retargeting Website Custom Audience</td>
+          <td>3,00 EUR/Tag</td>
+          <td>Website-Besucher ~30 Tage, Bayern</td>
+          <td>Reaktivieren</td>
+        </tr>
+        <tr>
+          <td>Lookalike 1% Bayern</td>
+          <td>3,00 EUR/Tag</td>
+          <td>LAL 1% DE-Bayern, 25–55 J.</td>
+          <td>Reaktivieren</td>
+        </tr>
+        <tr>
+          <td>Interesse Bayern/Seen</td>
+          <td>3,00 EUR/Tag</td>
+          <td>Interessen Seen/Wandern/Bayern, DE</td>
+          <td>Reaktivieren</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="budget-summary">
+      <strong>Budget KW35:</strong> 9 EUR/Tag × 7 Tage = max. 63 EUR<br>
+      <strong>Laufzeit:</strong> Mo 24.08.2026 00:00 – So 30.08.2026 23:59<br>
+      <strong>Kampagne:</strong> SEE-4330 · Seegfui-Sales-Regional · OUTCOME_SALES<br>
+      <strong>Creative:</strong> Repariertes Tee-Love-Ammersee Creative (SEE-4726) aktiv
+    </div>
+    <div class="kpi-block">
+      📊 <strong>KW34-Performance (15.–23.08.):</strong> 34,34 EUR Spend · ROAS-Auswertung KW34-Ende<br>
+      🎯 <strong>Scale-Regel KW35:</strong> ROAS &gt; 3 nach 5 Tagen → CMO meldet, Peter entscheidet Erhöhung<br>
+      🛑 <strong>Kill-Regel:</strong> AdSet mit 0 Add-to-Cart nach 3 Tagen → pausieren + melden
+    </div>
+  </div>
+
+  <!-- Summary -->
+  <div class="ads-card" style="background:#f8f8f5;">
+    <h3 style="font-size:0.85rem;">Freigabe-Scope KW35</h3>
+    <div style="font-size:0.8rem;line-height:1.7;margin-top:8px;">
+      ✅ <strong>4 organische Posts</strong> (Mo/Mi/Fr/Sa, FB+IG) — Captions fertig, Visuals pending (CTO/KreativAgent)<br>
+      ✅ <strong>Meta Ads SEE-4330</strong> — 9 EUR/Tag, max. 63 EUR, Laufzeit KW35<br>
+      ⚡ <strong>Visuals zu beschaffen:</strong> Printful-Mockups für P1 (T-Shirt) + P2 (Hoodie) + P4 (Tegernsee)<br>
+      ⚡ <strong>P3 Collage:</strong> 3-Seen-Zusammenschnitt (KreativAgent oder Einzel-Mockups)
+    </div>
+  </div>
+
+  <div style="font-size:0.78rem;color:#888;text-align:center;margin-top:8px;">
+    Kein Post ohne akzeptierte Freigabe (SEE-4454 · SEE-2255) · Kein autonomes Ad-Spend-Erhöhen<br>
+    KI-Inhalt dieser Woche: keiner geplant → kein EU-AI-Act-Label erforderlich
+  </div>
+
+</div>
+
+<footer>
+  SEE-5131 · Wochenplan KW35 · Stand 23.08.2026 · Rev 1<br>
+  Erstellt von CMO-Agent · Freigabe durch Peter (CEO)
+</footer>
+
+</body>
+</html>
