@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Seegfui — Lifestyle-Bilder Integration KW35/36 (SEE-5383)</title>
+<style>
+  :root {
+    --see-blau: #1a6e8a;
+    --see-blau-hell: #e8f4f8;
+    --gruen: #2d7a47;
+    --gruen-hell: #e8f5ee;
+    --orange: #c75e1a;
+    --grau: #444;
+    --border: #ddd;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    background: #f0f2f5;
+    color: #222;
+    padding: 24px 16px;
+  }
+  header {
+    max-width: 1060px;
+    margin: 0 auto 32px;
+    background: var(--see-blau);
+    color: white;
+    padding: 28px 32px;
+    border-radius: 12px;
+  }
+  header h1 { font-size: 1.6rem; margin-bottom: 6px; }
+  header p { opacity: 0.85; font-size: 0.95rem; }
+  .badge {
+    display: inline-block;
+    padding: 3px 10px;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    margin-right: 6px;
+  }
+  .badge-organisch { background: #d4edda; color: #155724; }
+  .badge-ki { background: #ede9fe; color: #5b21b6; }
+  .badge-ig { background: #e1306c; color: white; }
+  .badge-fb { background: #1877f2; color: white; }
+  .badge-new { background: #fef3c7; color: #92400e; font-weight: 700; }
+  .badge-paid { background: #d1ecf1; color: #0c5460; }
+  .section-title {
+    max-width: 1060px;
+    margin: 0 auto 16px;
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--grau);
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    padding-left: 4px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .posts-grid {
+    max-width: 1060px;
+    margin: 0 auto 40px;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 18px;
+  }
+  .post-card {
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    display: flex;
+    flex-direction: column;
+  }
+  .post-card.unchanged { opacity: 0.65; }
+  .post-card.lifestyle-new { box-shadow: 0 0 0 3px #8b5cf6, 0 2px 12px rgba(139,92,246,0.2); }
+  .post-card .image-wrap {
+    position: relative;
+    height: 280px;
+    background: #f5f5f5;
+    overflow: hidden;
+  }
+  .post-card .image-wrap img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .post-card .image-wrap .date-chip {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    background: rgba(0,0,0,0.7);
+    color: white;
+    border-radius: 6px;
+    padding: 4px 10px;
+    font-size: 0.78rem;
+    font-weight: 600;
+  }
+  .post-card .image-wrap .channel-chips {
+    position: absolute;
+    bottom: 12px;
+    right: 12px;
+    display: flex;
+    gap: 5px;
+  }
+  .lifestyle-label {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    background: #8b5cf6;
+    color: white;
+    border-radius: 5px;
+    padding: 3px 8px;
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+  }
+  .swap-label {
+    position: absolute;
+    top: 48px;
+    right: 12px;
+    background: #f59e0b;
+    color: white;
+    border-radius: 5px;
+    padding: 3px 8px;
+    font-size: 0.7rem;
+    font-weight: 700;
+  }
+  .post-card .body {
+    padding: 16px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .post-card .post-number {
+    font-size: 0.72rem;
+    font-weight: 700;
+    color: var(--see-blau);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+  .post-card .caption {
+    font-size: 0.88rem;
+    line-height: 1.55;
+    color: #333;
+    flex: 1;
+  }
+  .post-card .ki-note {
+    font-size: 0.78rem;
+    color: #5b21b6;
+    background: #ede9fe;
+    border-radius: 5px;
+    padding: 5px 8px;
+  }
+  .post-card .image-desc {
+    font-size: 0.78rem;
+    color: #777;
+    border-left: 3px solid var(--border);
+    padding-left: 9px;
+  }
+  .post-card .utm-line {
+    font-size: 0.72rem;
+    color: #999;
+    word-break: break-all;
+  }
+  .post-card .check-row {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+  }
+  .check {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 0.73rem;
+    color: var(--gruen);
+  }
+  .check::before { content: '✓'; font-weight: 700; }
+  .price-chip {
+    display: inline-block;
+    background: #fff3e0;
+    color: #e65100;
+    border-radius: 4px;
+    padding: 2px 8px;
+    font-size: 0.78rem;
+    font-weight: 700;
+  }
+  /* Info box */
+  .info-box {
+    max-width: 1060px;
+    margin: 0 auto 32px;
+    background: #ede9fe;
+    border: 2px solid #8b5cf6;
+    border-radius: 12px;
+    padding: 22px 28px;
+  }
+  .info-box h2 { font-size: 1rem; color: #5b21b6; margin-bottom: 10px; }
+  .info-box p { font-size: 0.88rem; color: #4c1d95; line-height: 1.6; }
+  .info-box ul { margin: 8px 0 0 18px; font-size: 0.85rem; color: #4c1d95; line-height: 1.7; }
+  /* Approval box */
+  .approval-box {
+    max-width: 1060px;
+    margin: 0 auto 40px;
+    background: #fffbeb;
+    border: 2px solid #f59e0b;
+    border-radius: 12px;
+    padding: 24px 28px;
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+  }
+  .approval-box .icon { font-size: 2.2rem; flex-shrink: 0; }
+  .approval-box h2 { font-size: 1.05rem; margin-bottom: 7px; color: #92400e; }
+  .approval-box p { font-size: 0.88rem; color: #78350f; line-height: 1.5; }
+  .approval-box .details { margin-top: 10px; font-size: 0.82rem; color: #555; }
+  /* Checks */
+  .checks-box { max-width: 1060px; margin: 0 auto 40px; background: var(--gruen-hell); border-radius: 12px; padding: 20px 24px; }
+  .checks-box h3 { margin-bottom: 12px; color: var(--gruen); font-size: 0.87rem; text-transform: uppercase; letter-spacing: 0.05em; }
+  .checks-list { display: flex; flex-wrap: wrap; gap: 8px; }
+  .check-item { display: flex; align-items: center; gap: 6px; background: white; border-radius: 6px; padding: 5px 11px; font-size: 0.8rem; color: #333; }
+  .check-item::before { content: '✅'; }
+  footer { max-width: 1060px; margin: 0 auto; text-align: center; font-size: 0.76rem; color: #999; padding-bottom: 28px; }
+  .divider { max-width: 1060px; margin: 0 auto 32px; border: 0; border-top: 2px dashed var(--border); }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>Lifestyle-Bilder Integration — KW35 Update + KW36 Vorschau</h1>
+  <p>SEE-5383 · 24. August 2026 &nbsp;|&nbsp; Seegfui CMO &nbsp;|&nbsp;
+    <span class="badge" style="background:#fef3c7;color:#92400e">⏳ Freigabe erbeten (Peter)</span>
+  </p>
+  <p style="margin-top:10px;opacity:0.9;font-size:0.88rem">
+    Lifestyle-Bilder (fal.ai SEE-5379) ersetzen Produkt-auf-Weiß-Flatlay-Posts · 2 Hero-Swaps KW35 · 4 Kadenz-Posts KW36 · KI-Label Pflicht · Kein PoD-Text (SEE-5380)
+  </p>
+</header>
+
+<!-- INFO BOX -->
+<div class="info-box">
+  <h2>🖼️ Was hier geändert wird (SEE-5383)</h2>
+  <p>Die fal.ai-Lifestyle-Bilder aus SEE-5379 (QA bestanden, CDN-live) ersetzen die bisherigen
+  Produkt-auf-Weiß-Flatlay-Posts. Methode: <strong>Preserve-Mask-Swap</strong> — Produkt + Aufdruck bleiben
+  byte-identisch (Printful-Basis), nur der Hintergrund wird zur see-treuen Seekulisse. Aufdruck = nativ
+  korrekt, kein KI-Text-Garble möglich.</p>
+  <ul>
+    <li><strong>KW35 P1 (Mo 24.08.):</strong> Weißer Tee-Flatlay → <strong>Hero 1</strong> Lifestyle (Model am Ammersee-Steg, Andechs-artige Kirche)</li>
+    <li><strong>KW35 P5 NEU (So 30.08.):</strong> Tassen-Post hinzugefügt → <strong>Hero 2</strong> Lifestyle (Tasse auf Holzsteg, Ammersee)</li>
+    <li><strong>KW35 P2–P4:</strong> Unverändert (Hoodies/Collage — keine Lifestyle-Entsprechung in diesem Set)</li>
+    <li><strong>KW36 P6–P9:</strong> Vollständige Lifestyle-Kadenz (Navy Tee, Bordeaux Tee, Anthrazit Tee, Tasse Café)</li>
+    <li><strong>Captions:</strong> PoD-Textbaustein vollständig entfernt (SEE-5380) · KI-Label Pflicht (EU AI Act Art. 50)</li>
+  </ul>
+</div>
+
+<!-- KW35 ORGANISCHE POSTS -->
+<div class="section-title">
+  KW35 — 24.–30. August 2026
+  <span class="badge badge-organisch">5 Posts (P1 neu + P5 neu)</span>
+  <span class="badge badge-ki">🤖 KI-Bilder: P1, P5</span>
+</div>
+
+<div class="posts-grid">
+
+  <!-- P1: Mo 24.08. — LIFESTYLE SWAP -->
+  <div class="post-card lifestyle-new">
+    <div class="image-wrap">
+      <img src="https://cdn.jsdelivr.net/gh/djmana78/seegfui-print-assets@9665290b19fe236d5fabc6fe1971c515abcff1d5/social/see5379/hero-tee-ammersee-weiss.jpg"
+           alt="Lifestyle: Model mit Am-See-dahoam-Tee (weiß) vor Ammersee-Kulisse"
+           loading="lazy"
+           onerror="this.style.display='none';this.parentElement.style.background='linear-gradient(135deg,#ede9fe,#ddd6fe)'">
+      <span class="date-chip">Mo 24. Aug · 18:30</span>
+      <span class="lifestyle-label">LIFESTYLE</span>
+      <span class="swap-label">SWAP ↑</span>
+      <div class="channel-chips">
+        <span class="badge badge-fb">FB</span>
+        <span class="badge badge-ig">IG</span>
+      </div>
+    </div>
+    <div class="body">
+      <div class="post-number">Post P1 — Tee „Am See dahoam" · Ammersee Weiß <span class="price-chip">33,90 €</span></div>
+      <div class="caption">
+        Am See dahoam — und dein See kommt mit. 🌊<br><br>
+        Bairischer Spruch, Ammersee-Druck, weißes T-Shirt. Trag dein Dahoam, wo auch immer du bist.<br><br>
+        👉 Link in Bio · seegfui.de<br><br>
+        🤖 Dieses Bild wurde mit KI erstellt.<br><br>
+        <em style="color:#999">#liabzumsee #ammersee #fünfseenland #tshirt #dahoam #seegfui #amseediatsch</em>
+      </div>
+      <div class="ki-note">🤖 fal.ai bria/background/replace · Preserve-Mask-Swap · Produkt byte-identisch (Printful) · Hintergrund KI → Label Pflicht (SEE-4336)</div>
+      <div class="image-desc">Hero 1 · hero-tee-ammersee-weiss.jpg · CDN SEE-5379 @9665290b ✓</div>
+      <div class="utm-line">UTM: ?utm_source=facebook&amp;utm_medium=post&amp;utm_campaign=sprueche-shirt&amp;utm_content=lifestyle-ammersee-weiss</div>
+      <div class="check-row">
+        <span class="check">Kein Bio-Claim</span>
+        <span class="check">Kein PoD-Text</span>
+        <span class="check">KI-Label ✓</span>
+        <span class="check">Aufdruck-QA PASS</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- P2: Mi 26.08. — UNVERÄNDERT -->
+  <div class="post-card unchanged">
+    <div class="image-wrap">
+      <img src="https://seegfui.de/wp-content/uploads/2026/08/see4708-st-hoodie-see-blau-navy-front.png"
+           alt="Seehnsucht Hoodie M2580 Starnberger See Marineblau" loading="lazy"
+           onerror="this.style.display='none';this.parentElement.style.background='#e5e7eb'">
+      <span class="date-chip">Mi 26. Aug · 18:30</span>
+      <div class="channel-chips">
+        <span class="badge badge-ig">IG</span>
+        <span class="badge badge-fb">FB</span>
+      </div>
+    </div>
+    <div class="body">
+      <div class="post-number">Post P2 — Seehnsucht Hoodie Starnberger See <span class="price-chip">63,90 €</span></div>
+      <div class="caption" style="color:#999;font-style:italic">
+        Unverändert (kein Hoodie-Lifestyle-Bild im aktuellen Set) — genehmigtes KW35-Creative bleibt.
+      </div>
+      <div class="image-desc">Printful-Mockup M2580 Marineblau · Starnberger See · kein KI · bereits genehmigt KW35</div>
+    </div>
+  </div>
+
+  <!-- P3: Fr 28.08. — UNVERÄNDERT -->
+  <div class="post-card unchanged">
+    <div class="image-wrap">
+      <img src="https://cdn.jsdelivr.net/gh/djmana78/seegfui-print-assets@1b277dd69038d3251988330fd92119e13d93f86c/social/see5137/see5137-3seen-collage-4x5.png"
+           alt="3-Seen-Collage" loading="lazy"
+           onerror="this.style.display='none';this.parentElement.style.background='#e5e7eb'">
+      <span class="date-chip">Fr 28. Aug · 18:30</span>
+      <div class="channel-chips">
+        <span class="badge badge-ig">IG</span>
+        <span class="badge badge-fb">FB</span>
+      </div>
+    </div>
+    <div class="body">
+      <div class="post-number">Post P3 — 3-Seen-Collage · Kollektion-Überblick</div>
+      <div class="caption" style="color:#999;font-style:italic">
+        Unverändert — 3-Seen-Collage (kein KI, bereits genehmigt).
+      </div>
+      <div class="image-desc">3-Seen-Collage SEE-5137 · kein KI · bereits genehmigt KW35</div>
+    </div>
+  </div>
+
+  <!-- P4: Sa 29.08. — UNVERÄNDERT -->
+  <div class="post-card unchanged">
+    <div class="image-wrap">
+      <img src="https://seegfui.de/wp-content/uploads/2026/08/see4708-tg-hoodie-see-blau-anthrazit-front.png"
+           alt="Seehnsucht Hoodie Tegernsee Anthrazit" loading="lazy"
+           onerror="this.style.display='none';this.parentElement.style.background='#e5e7eb'">
+      <span class="date-chip">Sa 29. Aug · 11:00</span>
+      <div class="channel-chips">
+        <span class="badge badge-ig">IG</span>
+        <span class="badge badge-fb">FB</span>
+      </div>
+    </div>
+    <div class="body">
+      <div class="post-number">Post P4 — Seehnsucht Hoodie Tegernsee <span class="price-chip">63,90 €</span></div>
+      <div class="caption" style="color:#999;font-style:italic">
+        Unverändert — bereits genehmigt KW35.
+      </div>
+      <div class="image-desc">Printful-Mockup M2580 Anthrazit · Tegernsee · kein KI · bereits genehmigt KW35</div>
+    </div>
+  </div>
+
+  <!-- P5: So 30.08. — TASSE HERO NEU -->
+  <div class="post-card lifestyle-new">
+    <div class="image-wrap">
+      <img src="https://cdn.jsdelivr.net/gh/djmana78/seegfui-print-assets@9665290b19fe236d5fabc6fe1971c515abcff1d5/social/see5379/hero-tasse-ammersee.jpg"
+           alt="Lifestyle: Am-See-dahoam-Tasse auf Holzsteg am Ammersee"
+           loading="lazy"
+           onerror="this.style.display='none';this.parentElement.style.background='linear-gradient(135deg,#ede9fe,#ddd6fe)'">
+      <span class="date-chip">So 30. Aug · 11:00</span>
+      <span class="lifestyle-label">LIFESTYLE</span>
+      <span class="badge-new badge" style="position:absolute;top:48px;right:12px">NEU</span>
+      <div class="channel-chips">
+        <span class="badge badge-fb">FB</span>
+        <span class="badge badge-ig">IG</span>
+      </div>
+    </div>
+    <div class="body">
+      <div class="post-number">Post P5 NEU — Tasse „Am See dahoam" · Ammersee-Steg ☕ <span class="price-chip">~19,90 €</span></div>
+      <div class="caption">
+        Kaffee. Holzsteg. Ammersee. ☕🌊<br><br>
+        Die beste Tasse des Morgens — mit deinem See auf der Seite, genau wo's hingehört.<br><br>
+        👉 Link in Bio · seegfui.de<br><br>
+        🤖 Dieses Bild wurde mit KI erstellt.<br><br>
+        <em style="color:#999">#liabzumsee #ammersee #fünfseenland #tasse #kaffeeamsee #dahoam #seegfui</em>
+      </div>
+      <div class="ki-note">🤖 fal.ai bria/background/replace · Tasse (Produktfoto) byte-identisch · Hintergrund KI → Label Pflicht</div>
+      <div class="image-desc">Hero 2 · hero-tasse-ammersee.jpg · CDN SEE-5379 @9665290b ✓</div>
+      <div class="utm-line">UTM: ?utm_source=facebook&amp;utm_medium=post&amp;utm_campaign=tasse&amp;utm_content=lifestyle-ammersee-steg</div>
+      <div class="check-row">
+        <span class="check">Kein Bio-Claim</span>
+        <span class="check">Kein PoD-Text</span>
+        <span class="check">KI-Label ✓</span>
+        <span class="check">See-Treue: AMMERSEE ✓</span>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<hr class="divider">
+
+<!-- KW36 ORGANISCHE POSTS -->
+<div class="section-title">
+  KW36 — Lifestyle-Kadenz · 31. Aug – 6. Sep 2026
+  <span class="badge badge-organisch">4 Posts (Mo/Mi/Fr/So)</span>
+  <span class="badge badge-ki">🤖 Alle KI-Bilder</span>
+  <span class="badge" style="background:#fef3c7;color:#92400e">Vorschau — separater Wochenplan folgt</span>
+</div>
+
+<div class="posts-grid">
+
+  <!-- P6: Mo 31.08. — Tasse Café-Terrasse -->
+  <div class="post-card lifestyle-new">
+    <div class="image-wrap">
+      <img src="https://cdn.jsdelivr.net/gh/djmana78/seegfui-print-assets@9665290b19fe236d5fabc6fe1971c515abcff1d5/social/see5379/tasse-ammersee-cafe.jpg"
+           alt="Lifestyle: Tasse auf Café-Terrasse am Ammersee"
+           loading="lazy"
+           onerror="this.style.display='none';this.parentElement.style.background='linear-gradient(135deg,#ede9fe,#ddd6fe)'">
+      <span class="date-chip">Mo 31. Aug · 18:30</span>
+      <span class="lifestyle-label">LIFESTYLE</span>
+      <div class="channel-chips">
+        <span class="badge badge-fb">FB</span>
+        <span class="badge badge-ig">IG</span>
+      </div>
+    </div>
+    <div class="body">
+      <div class="post-number">Post P6 — Tasse · Café-Terrasse Ammersee ☕</div>
+      <div class="caption">
+        Sonntagsmorgen. Café-Terrasse. Ammersee. ☕🌅<br><br>
+        Wenn der See vorm Frühstück liegt — gibt's nichts Besseres.<br><br>
+        👉 Link in Bio · seegfui.de<br><br>
+        🤖 Dieses Bild wurde mit KI erstellt.<br><br>
+        <em style="color:#999">#liabzumsee #ammersee #fünfseenland #kaffeeamsee #morgenamsee #seegfui</em>
+      </div>
+      <div class="ki-note">🤖 tasse-ammersee-cafe.jpg · CDN SEE-5379 @9665290b · See-Treue: Ammersee-Café ✓</div>
+      <div class="utm-line">UTM: ?utm_source=facebook&amp;utm_medium=post&amp;utm_campaign=tasse&amp;utm_content=lifestyle-ammersee-cafe</div>
+      <div class="check-row">
+        <span class="check">Kein Bio-Claim</span>
+        <span class="check">Kein PoD-Text</span>
+        <span class="check">KI-Label ✓</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- P7: Mi 02.09. — Tee Navy Ammersee -->
+  <div class="post-card lifestyle-new">
+    <div class="image-wrap">
+      <img src="https://cdn.jsdelivr.net/gh/djmana78/seegfui-print-assets@9665290b19fe236d5fabc6fe1971c515abcff1d5/social/see5379/tee-ammersee-navy.jpg"
+           alt="Lifestyle: Am-See-dahoam-Tee Navy · Frau auf Ammersee-Steg"
+           loading="lazy"
+           onerror="this.style.display='none';this.parentElement.style.background='linear-gradient(135deg,#ede9fe,#ddd6fe)'">
+      <span class="date-chip">Mi 2. Sep · 18:30</span>
+      <span class="lifestyle-label">LIFESTYLE</span>
+      <div class="channel-chips">
+        <span class="badge badge-ig">IG</span>
+        <span class="badge badge-fb">FB</span>
+      </div>
+    </div>
+    <div class="body">
+      <div class="post-number">Post P7 — Tee „Am See dahoam" · Navy · Ammersee</div>
+      <div class="caption">
+        Steg. Stille. Ammersee. 🌊<br><br>
+        Navy ist nicht nur eine Farbe — es ist das See-Blau, das einem nie ausgeht.<br><br>
+        👉 Link in Bio · seegfui.de<br><br>
+        🤖 Dieses Bild wurde mit KI erstellt.<br><br>
+        <em style="color:#999">#liabzumsee #ammersee #fünfseenland #tshirt #dahoam #seegfui #navy</em>
+      </div>
+      <div class="ki-note">🤖 tee-ammersee-navy.jpg · CDN SEE-5379 @9665290b · Ammersee-Kulisse ✓</div>
+      <div class="utm-line">UTM: ?utm_source=instagram&amp;utm_medium=post&amp;utm_campaign=sprueche-shirt&amp;utm_content=lifestyle-ammersee-navy</div>
+      <div class="check-row">
+        <span class="check">Kein Bio-Claim</span>
+        <span class="check">Kein PoD-Text</span>
+        <span class="check">KI-Label ✓</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- P8: Fr 04.09. — Tee Bordeaux Starnberger -->
+  <div class="post-card lifestyle-new">
+    <div class="image-wrap">
+      <img src="https://cdn.jsdelivr.net/gh/djmana78/seegfui-print-assets@9665290b19fe236d5fabc6fe1971c515abcff1d5/social/see5379/tee-starnberger-bordeaux.jpg"
+           alt="Lifestyle: Am-See-dahoam-Tee Bordeaux · Starnberger Segelhafen"
+           loading="lazy"
+           onerror="this.style.display='none';this.parentElement.style.background='linear-gradient(135deg,#ede9fe,#ddd6fe)'">
+      <span class="date-chip">Fr 4. Sep · 18:30</span>
+      <span class="lifestyle-label">LIFESTYLE</span>
+      <div class="channel-chips">
+        <span class="badge badge-ig">IG</span>
+        <span class="badge badge-fb">FB</span>
+      </div>
+    </div>
+    <div class="body">
+      <div class="post-number">Post P8 — Tee „Am See dahoam" · Bordeaux · Starnberger See</div>
+      <div class="caption">
+        Segelhafen. Weite. Starnberger See. ⛵🌊<br><br>
+        Bordeaux und Starnberger See — ein Outfit wie die Gegend selbst: ruhig, weit, dahoam.<br><br>
+        👉 Link in Bio · seegfui.de<br><br>
+        🤖 Dieses Bild wurde mit KI erstellt.<br><br>
+        <em style="color:#999">#liabzumsee #starnbergersee #fünfseenland #tshirt #dahoam #seegfui</em>
+      </div>
+      <div class="ki-note">🤖 tee-starnberger-bordeaux.jpg · CDN SEE-5379 @9665290b · Starnberger Kulisse ✓</div>
+      <div class="utm-line">UTM: ?utm_source=instagram&amp;utm_medium=post&amp;utm_campaign=sprueche-shirt&amp;utm_content=lifestyle-starnberger-bordeaux</div>
+      <div class="check-row">
+        <span class="check">Kein Bio-Claim</span>
+        <span class="check">Kein PoD-Text</span>
+        <span class="check">KI-Label ✓</span>
+        <span class="check">See-Treue: Starnberger ✓</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- P9: So 06.09. — Tee Anthrazit Tegernsee -->
+  <div class="post-card lifestyle-new">
+    <div class="image-wrap">
+      <img src="https://cdn.jsdelivr.net/gh/djmana78/seegfui-print-assets@9665290b19fe236d5fabc6fe1971c515abcff1d5/social/see5379/tee-tegernsee-anthrazit.jpg"
+           alt="Lifestyle: Am-See-dahoam-Tee Anthrazit · Tegernsee Alpenpanorama"
+           loading="lazy"
+           onerror="this.style.display='none';this.parentElement.style.background='linear-gradient(135deg,#ede9fe,#ddd6fe)'">
+      <span class="date-chip">So 6. Sep · 11:00</span>
+      <span class="lifestyle-label">LIFESTYLE</span>
+      <div class="channel-chips">
+        <span class="badge badge-ig">IG</span>
+        <span class="badge badge-fb">FB</span>
+      </div>
+    </div>
+    <div class="body">
+      <div class="post-number">Post P9 — Tee „Am See dahoam" · Anthrazit · Tegernsee</div>
+      <div class="caption">
+        Alpen. Türkis. Tegernsee. 🏔️🌊<br><br>
+        Anthrazit und Tegernsee — für die, die den Bergen näher sind als dem Flachland. Trag dein Dahoam.<br><br>
+        👉 Link in Bio · seegfui.de<br><br>
+        🤖 Dieses Bild wurde mit KI erstellt.<br><br>
+        <em style="color:#999">#liabzumsee #tegernsee #fünfseenland #tshirt #dahoam #seegfui #bayernalpen</em>
+      </div>
+      <div class="ki-note">🤖 tee-tegernsee-anthrazit.jpg · CDN SEE-5379 @9665290b · Tegernsee Alpenkette ✓ (See-Treue §8.7)</div>
+      <div class="utm-line">UTM: ?utm_source=instagram&amp;utm_medium=post&amp;utm_campaign=sprueche-shirt&amp;utm_content=lifestyle-tegernsee-anthrazit</div>
+      <div class="check-row">
+        <span class="check">Kein Bio-Claim</span>
+        <span class="check">Kein PoD-Text</span>
+        <span class="check">KI-Label ✓</span>
+        <span class="check">See-Treue: Tegernsee alpin ✓</span>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- CHECKS -->
+<div class="checks-box">
+  <h3>✅ Qualitäts-Leitplanken geprüft (alle Lifestyle-Posts)</h3>
+  <div class="checks-list">
+    <div class="check-item">Kein Bio/Öko-Claim (SEE-4450/4451) — alle Captions konform</div>
+    <div class="check-item">Kein PoD-Textbaustein (SEE-5380) — kein „erst wenn bestellt" o.ä.</div>
+    <div class="check-item">KI-Label Pflicht (EU AI Act Art. 50): 🤖-Zeile in jeder Lifestyle-Caption</div>
+    <div class="check-item">Aufdruck-QA (§8.1): Produkt byte-identisch (Printful-Basis), kein Garble</div>
+    <div class="check-item">See-Treue (§8.7): Ammersee=flach+Andechs-artig, Tegernsee=Alpenkette, Starnberger=Segelhafen</div>
+    <div class="check-item">Keine irreführende Ortsbehauptung, kein Drittmarken-Logo (Kirche = generisch)</div>
+    <div class="check-item">CTA seegfui.de + UTM-konform (SEE-1226) — alle Posts</div>
+    <div class="check-item">Preis T-Shirt 33,90 € · Tasse ~19,90 € — Preisangabe nur wo sicher bekannt</div>
+    <div class="check-item">CDN URLs: seegfui-print-assets @9665290b (SHA-gepinnt, HTTP 200 geprüft)</div>
+    <div class="check-item">P2–P4 KW35: unverändert — genehmigtes Creative bleibt, kein neuer Approval nötig</div>
+    <div class="check-item">KW36 P6–P9: Vorschau, separater vollständiger Wochenplan folgt in KW36</div>
+  </div>
+</div>
+
+<!-- APPROVAL BOX -->
+<div class="approval-box">
+  <div class="icon">🔏</div>
+  <div>
+    <h2>Freigabe erbeten — Peter (Board)</h2>
+    <p>Bitte freigeben: (1) KW35 P1-Swap (Weißer Tee → Lifestyle-Bild, heute Mo 24.08. 18:30) und (2) KW35 P5 neu (Tasse So 30.08. 11:00). Sowie (3) Lifestyle-Kadenz KW36 P6–P9 als Vorschau (vollständiger Wochenplan KW36 wird Montag 31.08. vorgelegt).<br>
+    KW35 P2–P4 bleiben wie genehmigt — kein erneuter Approval nötig.</p>
+    <div class="details">
+      Freigabe via Paperclip SEE-5383 (request_confirmation) &nbsp;|&nbsp;
+      Kein zusätzlicher Ad-Spend &nbsp;|&nbsp;
+      Konvention: <code>docs/marketing-content-wochenplan-konvention.md</code> + <code>docs/social-approval-gate-see2255.md</code>
+    </div>
+  </div>
+</div>
+
+<footer>
+  Lifestyle-Integration KW35/36 · Seegfui CMO · Stand: 2026-08-24 (Rev 1) · SEE-5383 / Parent SEE-5377 / Bilder SEE-5379 · PoD-Text-Fix SEE-5380
+</footer>
+
+</body>
+</html>
