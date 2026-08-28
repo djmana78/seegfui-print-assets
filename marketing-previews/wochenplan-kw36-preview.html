@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Seegfui Wochenplan KW36 – 31. Aug – 06. Sep 2026</title>
+<style>
+  :root {
+    --see-blau: #1a6e8a;
+    --see-blau-hell: #e8f4f8;
+    --gruen: #2d7a47;
+    --gruen-hell: #e8f5ee;
+    --orange: #c75e1a;
+    --grau: #444;
+    --border: #ddd;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    background: #f0f2f5;
+    color: #222;
+    padding: 24px 16px;
+  }
+  header {
+    max-width: 1060px;
+    margin: 0 auto 32px;
+    background: var(--see-blau);
+    color: white;
+    padding: 28px 32px;
+    border-radius: 12px;
+  }
+  header h1 { font-size: 1.6rem; margin-bottom: 6px; }
+  header p { opacity: 0.85; font-size: 0.95rem; }
+  .badge {
+    display: inline-block;
+    padding: 3px 10px;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    margin-right: 6px;
+  }
+  .badge-warten { background: #fff3cd; color: #856404; }
+  .badge-organisch { background: #d4edda; color: #155724; }
+  .badge-paid { background: #d1ecf1; color: #0c5460; }
+  .badge-ig { background: #e1306c; color: white; }
+  .badge-fb { background: #1877f2; color: white; }
+  .section-title {
+    max-width: 1060px;
+    margin: 0 auto 16px;
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--grau);
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    padding-left: 4px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .posts-grid {
+    max-width: 1060px;
+    margin: 0 auto 40px;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 18px;
+  }
+  .post-card {
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    display: flex;
+    flex-direction: column;
+  }
+  .post-card .image-wrap {
+    position: relative;
+    height: 260px;
+    background: #f5f5f5;
+    overflow: hidden;
+  }
+  .post-card .image-wrap img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .post-card .image-wrap .date-chip {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    background: rgba(0,0,0,0.65);
+    color: white;
+    border-radius: 6px;
+    padding: 4px 10px;
+    font-size: 0.78rem;
+    font-weight: 600;
+  }
+  .post-card .image-wrap .channel-chips {
+    position: absolute;
+    bottom: 12px;
+    right: 12px;
+    display: flex;
+    gap: 5px;
+  }
+  .post-card .body {
+    padding: 16px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .post-card .post-number {
+    font-size: 0.72rem;
+    font-weight: 700;
+    color: var(--see-blau);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+  .post-card .caption {
+    font-size: 0.88rem;
+    line-height: 1.55;
+    color: #333;
+    flex: 1;
+  }
+  .post-card .image-desc {
+    font-size: 0.78rem;
+    color: #777;
+    border-left: 3px solid var(--border);
+    padding-left: 9px;
+  }
+  .post-card .utm-line {
+    font-size: 0.72rem;
+    color: #999;
+    word-break: break-all;
+  }
+  .post-card .check-row {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+  }
+  .check {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 0.73rem;
+    color: var(--gruen);
+  }
+  .check::before { content: '✓'; font-weight: 700; }
+  .price-chip {
+    display: inline-block;
+    background: #fff3e0;
+    color: #e65100;
+    border-radius: 4px;
+    padding: 2px 8px;
+    font-size: 0.78rem;
+    font-weight: 700;
+  }
+  /* Ads section */
+  .ads-box {
+    max-width: 1060px;
+    margin: 0 auto 40px;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    overflow: hidden;
+  }
+  .ads-box .ads-header {
+    background: var(--see-blau);
+    color: white;
+    padding: 18px 24px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .ads-box .ads-header h2 { font-size: 1.05rem; }
+  .ads-body { padding: 24px; }
+  .ads-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 16px;
+    margin-bottom: 20px;
+  }
+  .kpi-card {
+    background: var(--see-blau-hell);
+    border-radius: 8px;
+    padding: 14px;
+    text-align: center;
+  }
+  .kpi-card .value {
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: var(--see-blau);
+    display: block;
+  }
+  .kpi-card .label {
+    font-size: 0.78rem;
+    color: #555;
+    margin-top: 4px;
+  }
+  .adset-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; margin-bottom: 16px; }
+  .adset-card { background: var(--see-blau-hell); border-radius: 8px; padding: 12px 14px; font-size: 0.82rem; }
+  .adset-card .adset-name { font-weight: 700; color: var(--see-blau); margin-bottom: 4px; font-size: 0.78rem; text-transform: uppercase; }
+  .adset-card .adset-budget { font-size: 1.1rem; font-weight: 800; color: var(--see-blau); }
+  .rule-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 14px; }
+  .rule-box { padding: 12px 14px; border-radius: 8px; font-size: 0.83rem; }
+  .rule-box.kill { background: #fde8e8; }
+  .rule-box.scale { background: var(--gruen-hell); }
+  .rule-box .rule-label { font-weight: 700; font-size: 0.73rem; text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 4px; }
+  .rule-box.kill .rule-label { color: #c0392b; }
+  .rule-box.scale .rule-label { color: var(--gruen); }
+  /* Approval */
+  .approval-box {
+    max-width: 1060px;
+    margin: 0 auto 40px;
+    background: #fffbeb;
+    border: 2px solid #f59e0b;
+    border-radius: 12px;
+    padding: 24px 28px;
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+  }
+  .approval-box .icon { font-size: 2.2rem; flex-shrink: 0; }
+  .approval-box h2 { font-size: 1.05rem; margin-bottom: 7px; color: #92400e; }
+  .approval-box p { font-size: 0.88rem; color: #78350f; line-height: 1.5; }
+  .approval-box .details { margin-top: 10px; font-size: 0.82rem; color: #555; }
+  /* Checks */
+  .checks-box { max-width: 1060px; margin: 0 auto 40px; background: var(--gruen-hell); border-radius: 12px; padding: 20px 24px; }
+  .checks-box h3 { margin-bottom: 12px; color: var(--gruen); font-size: 0.87rem; text-transform: uppercase; letter-spacing: 0.05em; }
+  .checks-list { display: flex; flex-wrap: wrap; gap: 8px; }
+  .check-item { display: flex; align-items: center; gap: 6px; background: white; border-radius: 6px; padding: 5px 11px; font-size: 0.8rem; color: #333; }
+  .check-item::before { content: '✅'; }
+  footer { max-width: 1060px; margin: 0 auto; text-align: center; font-size: 0.76rem; color: #999; padding-bottom: 28px; }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>Wochenplan KW36 — Content &amp; Ads</h1>
+  <p>31. August bis 06. September 2026 &nbsp;|&nbsp; Seegfui Marketing &nbsp;|&nbsp;
+    <span class="badge badge-warten">🔏 Freigabe erbeten</span>
+  </p>
+  <p style="margin-top:10px;opacity:0.9;font-size:0.88rem">
+    4 Posts (Mo/Mi/Fr/Sa) · Tasse + 2×T-Shirt + Hoodie · Meta Ads Fortsetzung · Budget max. 42 € · Alle 4 Bilder geliefert ✅
+  </p>
+</header>
+
+<!-- ORGANISCHE POSTS -->
+<div class="section-title">
+  Organische Posts
+  <span class="badge badge-organisch">4 geplant</span>
+  <span class="badge badge-organisch">Alle 4 Bilder geliefert ✅</span>
+</div>
+
+<div class="posts-grid">
+
+  <!-- P1: Mo 31.08. — I❤Ammersee Tasse Lifestyle -->
+  <div class="post-card">
+    <div class="image-wrap">
+      <img src="https://cdn.jsdelivr.net/gh/djmana78/seegfui-print-assets@f2d4cd96ea13e6937337f614945382a64526e4d0/social/see5854/see5854-love-ammersee-senf-lifestyle-handle-on-right.png"
+           alt="I Liebe Ammersee Tasse Lifestyle Senf Steg-Szene" loading="lazy"
+           onerror="this.style.display='none';this.parentElement.style.background='#e5e7eb'">
+      <span class="date-chip">Mo 31. Aug · 18:30</span>
+      <div class="channel-chips">
+        <span class="badge badge-ig">IG</span>
+        <span class="badge badge-fb">FB</span>
+      </div>
+    </div>
+    <div class="body">
+      <div class="post-number">Post #1 — I❤Ammersee Tasse · Herbst-Einstimmung <span class="price-chip">13,90 €</span></div>
+      <div class="caption">
+        Wann die Saison ausklingt, bleibt der Ammersee. Auf der Tass', am Morgen, überall. ❤️<br><br>
+        Die I❤Ammersee-Tasse — handgeschrieben, bairisch, in 8 Logofarben. Weil Seeliebe kein Verfallsdatum hat.<br><br>
+        👉 Link in Bio · seegfui.de/tassen<br><br>
+        <em style="color:#999">#ammersee #liabzumsee #tasse #seeliebe #dahoam #fünfseenland #seegfui #morgenkaffee</em>
+      </div>
+      <div class="image-desc">Lifestyle-Mockup SEE-5854 · Senf · I❤Ammersee Steg-Kulisse · bria-Swap kein KI ✓</div>
+      <div class="utm-line">UTM: ?utm_source=instagram&amp;utm_medium=post&amp;utm_campaign=tassen-highlight&amp;utm_content=ammersee-senf-lifestyle</div>
+      <div class="check-row">
+        <span class="check">Kein Bio-Claim</span>
+        <span class="check">Kein KI-Label nötig</span>
+        <span class="check">Bild CDN live ✓</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- P2: Mi 03.09. — T-Shirt Starnberger See -->
+  <div class="post-card">
+    <div class="image-wrap">
+      <img src="https://seegfui.de/wp-content/uploads/2026/08/see4698-starnberger-see-am-see-dahoam-see-blau-weiss-front.png"
+           alt="Sprüche T-Shirt Starnberger See Am See dahoam See-Blau Weiss" loading="lazy"
+           onerror="this.style.display='none';this.parentElement.style.background='#e5e7eb'">
+      <span class="date-chip">Mi 03. Sep · 18:30</span>
+      <div class="channel-chips">
+        <span class="badge badge-ig">IG</span>
+        <span class="badge badge-fb">FB</span>
+      </div>
+    </div>
+    <div class="body">
+      <div class="post-number">Post #2 — Sprüche-T-Shirt Starnberger See <span class="price-chip">33,90 €</span></div>
+      <div class="caption">
+        Vo Starnberger See nimmt man sich gern Zeit. Das T-Shirt eigentlich a. 💙<br><br>
+        8 bairische Sprüche — „Am See dahoam" überm Herzen, wo's hingehört. Weich, hochwertig, erst gedruckt wenn du bestellst.<br><br>
+        👉 Link in Bio · seegfui.de/t-shirts<br><br>
+        <em style="color:#999">#starnbergersee #liabzumsee #tshirt #dahoam #fünfseenland #sprüche #seegfui #sommer</em>
+      </div>
+      <div class="image-desc">Printful-Mockup STTU169 Weiss · Starnberger See „Am See dahoam" · See-Blau · kein KI ✓</div>
+      <div class="utm-line">UTM: ?utm_source=instagram&amp;utm_medium=post&amp;utm_campaign=shirt-spotlight&amp;utm_content=starnberger-see-weiss</div>
+      <div class="check-row">
+        <span class="check">Kein Bio-Claim</span>
+        <span class="check">Preis 33,90 € ✓</span>
+        <span class="check">Bild CDN live ✓</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- P3: Fr 05.09. — Hoodie Ammersee Navy -->
+  <div class="post-card">
+    <div class="image-wrap">
+      <img src="https://seegfui.de/wp-content/uploads/2026/08/see4708-am-hoodie-see-blau-navy-front.png"
+           alt="Seehnsucht Hoodie M2580 Ammersee Marineblau See-Blau" loading="lazy"
+           onerror="this.style.display='none';this.parentElement.style.background='#e5e7eb'">
+      <span class="date-chip">Fr 05. Sep · 18:30</span>
+      <div class="channel-chips">
+        <span class="badge badge-ig">IG</span>
+        <span class="badge badge-fb">FB</span>
+      </div>
+    </div>
+    <div class="body">
+      <div class="post-number">Post #3 — Seehnsucht-Hoodie Ammersee · Herbst <span class="price-chip">63,90 €</span></div>
+      <div class="caption">
+        September. Die Abende kühler. Der Ammersee: immer noch perfekt. 🌊<br><br>
+        Der Seehnsucht-Hoodie in Marineblau — warm genug für den ersten Herbstabend am See. Mit dem Ammersee-Umriss überm Herzen.<br><br>
+        👉 Link in Bio · seegfui.de/hoodies<br><br>
+        <em style="color:#999">#ammersee #liabzumsee #hoodie #herbst #dahoam #fünfseenland #seegfui #seehnsucht</em>
+      </div>
+      <div class="image-desc">Printful-Mockup M2580 Marineblau · Ammersee-Wortmarke See-Blau · kein KI ✓</div>
+      <div class="utm-line">UTM: ?utm_source=instagram&amp;utm_medium=post&amp;utm_campaign=hoodie-fokus&amp;utm_content=ammersee-navy-herbst</div>
+      <div class="check-row">
+        <span class="check">Kein Bio-Claim</span>
+        <span class="check">Preis 63,90 € ✓</span>
+        <span class="check">Bild CDN live ✓</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- P4: Sa 06.09. — T-Shirt Tegernsee -->
+  <div class="post-card">
+    <div class="image-wrap">
+      <img src="https://seegfui.de/wp-content/uploads/2026/08/see4698-tegernsee-am-see-dahoam-see-blau-weiss-front.png"
+           alt="Sprüche T-Shirt Tegernsee Am See dahoam See-Blau Weiss" loading="lazy"
+           onerror="this.style.display='none';this.parentElement.style.background='#e5e7eb'">
+      <span class="date-chip">Sa 06. Sep · 11:00</span>
+      <div class="channel-chips">
+        <span class="badge badge-ig">IG</span>
+        <span class="badge badge-fb">FB</span>
+      </div>
+    </div>
+    <div class="body">
+      <div class="post-number">Post #4 — Sprüche-T-Shirt Tegernsee <span class="price-chip">33,90 €</span></div>
+      <div class="caption">
+        Tegernsee sagt nix. Tegernsee muss nix sagen. 💙<br><br>
+        Unser Sprüche-T-Shirt für alle Tegernsee-Liebhaber — angenehm zu tragen, mit dem See-Umriss überm Herzen. Anderer See, gleiche Liab.<br><br>
+        👉 Link in Bio · seegfui.de/t-shirts<br><br>
+        <em style="color:#999">#tegernsee #liabzumsee #tshirt #dahoam #fünfseenland #sprüche #seegfui #bayernliebe</em>
+      </div>
+      <div class="image-desc">Printful-Mockup STTU169 Weiss · Tegernsee „Am See dahoam" · See-Blau · kein KI ✓</div>
+      <div class="utm-line">UTM: ?utm_source=instagram&amp;utm_medium=post&amp;utm_campaign=shirt-spotlight&amp;utm_content=tegernsee-weiss</div>
+      <div class="check-row">
+        <span class="check">Kein Bio-Claim</span>
+        <span class="check">Preis 33,90 € ✓</span>
+        <span class="check">Bild CDN live ✓</span>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ADS -->
+<div class="section-title">
+  Bezahlte Werbung
+  <span class="badge badge-paid">SEE-4330 · Fortsetzung KW36</span>
+  <span class="badge badge-warten">Freigabe erbeten</span>
+</div>
+
+<div class="ads-box">
+  <div class="ads-header">
+    <span style="font-size:1.4rem">📣</span>
+    <div>
+      <h2>Meta-Kampagne: Seegfui-Sales-Regional — KW36-Fortsetzung</h2>
+      <p style="opacity:0.8;font-size:0.83rem">ID 120246706852880009 · 2 aktive AdSets (Fuenfseenland war KW35 killed) · 31.08.–06.09. · Budget: max. 42 €</p>
+    </div>
+  </div>
+  <div class="ads-body">
+    <div class="ads-grid">
+      <div class="kpi-card">
+        <span class="value">€ 6<span style="font-size:0.9rem">/Tag</span></span>
+        <div class="label">Budget (2 AdSets × 3 €)</div>
+      </div>
+      <div class="kpi-card">
+        <span class="value">7 Tage</span>
+        <div class="label">Laufzeit KW36</div>
+      </div>
+      <div class="kpi-card">
+        <span class="value">€ 42</span>
+        <div class="label">Max. Spend KW36</div>
+      </div>
+      <div class="kpi-card">
+        <span class="value">≥ 1</span>
+        <div class="label">Kauf-Ziel</div>
+      </div>
+    </div>
+
+    <div class="adset-row">
+      <div class="adset-card">
+        <div class="adset-name">Retargeting WCA</div>
+        <div class="adset-budget">3 €/Tag</div>
+        <div style="font-size:0.78rem;color:#555;margin-top:4px">Warm Audience (~1.000 Nutzer) · weiterführen (funktionierte KW35)</div>
+      </div>
+      <div class="adset-card">
+        <div class="adset-name">Prospecting Bayern LAL 1%</div>
+        <div class="adset-budget">3 €/Tag</div>
+        <div style="font-size:0.78rem;color:#555;margin-top:4px">Lookalike Bavaria · lief KW35 weiter · prüfen ob Add-to-Cart</div>
+      </div>
+      <div class="adset-card" style="background:#fde8e8">
+        <div class="adset-name" style="color:#c0392b">Fuenfseenland — gekillt</div>
+        <div style="font-size:0.78rem;color:#888;margin-top:4px">KW35 Tag 3: 0 Add-to-Cart → pausiert · nicht reaktiviert KW36</div>
+      </div>
+    </div>
+
+    <p style="font-size:0.83rem;color:#555;margin-bottom:12px">
+      Creative: bleibt Tee-Love-Ammersee (SEE-4726). Objective: OUTCOME_SALES.
+      Reaktivierung nach CEO-Freigabe via CTO/SEE-4330.
+    </p>
+    <div class="rule-row">
+      <div class="rule-box kill">
+        <div class="rule-label">🛑 Kill-Regel</div>
+        0 Add-to-Cart nach 3 Tagen/AdSet → AdSet pausieren + Peter informieren
+      </div>
+      <div class="rule-box scale">
+        <div class="rule-label">📈 Scale-Regel</div>
+        ROAS &gt; 3 nach 5 Tagen → Peter entscheidet Budget-Verdopplung
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- CHECKS -->
+<div class="checks-box">
+  <h3>✅ Qualitäts-Leitplanken geprüft</h3>
+  <div class="checks-list">
+    <div class="check-item">Kein Bio/Öko-Claim (SEE-4450/4451) — alle Captions konform</div>
+    <div class="check-item">P1–P4: Printful-Mockups + bria-Lifestyle-Swap (kein KI-generierter Content) → kein EU-AI-Act-Label nötig</div>
+    <div class="check-item">Spend-Gate: keine autonome Aktivierung — CEO-Freigabe Pflicht (42 € max.)</div>
+    <div class="check-item">Preise verifiziert: Tasse 13,90 € · T-Shirt 33,90 € · Hoodie 63,90 €</div>
+    <div class="check-item">CTA seegfui.de + UTM-konform (SEE-1226)</div>
+    <div class="check-item">Alle 4 Bilder HTTP 200 geprüft vor Vorlage</div>
+    <div class="check-item">Produkt-Mix: 3 Seen gleichwertig · 3 Produktkategorien</div>
+  </div>
+</div>
+
+<!-- FREIGABE -->
+<div class="approval-box">
+  <div class="icon">🔏</div>
+  <div>
+    <h2>Freigabe erbeten — Peter (Board)</h2>
+    <p>4 Posts (Mo 31.08. – Sa 06.09.) + Meta-Ads SEE-4330 Fortsetzung (2 AdSets, 42 € max.) warten auf dein OK. Kein Post live, keine Ad aktiv ohne dein Accept im Paperclip-Issue SEE-5131.</p>
+    <div class="details">
+      Freigabe via Paperclip SEE-5131 (request_confirmation) &nbsp;|&nbsp;
+      Ads-Spend: <strong>max. 42 €/Woche</strong> braucht explizite Bestätigung &nbsp;|&nbsp;
+      Konvention: <code>docs/marketing-content-wochenplan-konvention.md</code>
+    </div>
+  </div>
+</div>
+
+<footer>
+  Wochenplan KW36 · Seegfui Marketing · Stand: 2026-08-28 (Rev 1) · SEE-4454 / SEE-5131
+</footer>
+
+</body>
+</html>
