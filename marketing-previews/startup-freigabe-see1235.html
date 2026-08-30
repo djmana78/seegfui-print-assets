@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Seegfui Social Start — Freigabe-Vorschau (SEE-1235)</title>
+<style>
+  :root {
+    --see-blau: #1a6e8a;
+    --see-blau-hell: #e8f4f8;
+    --gruen: #2d7a47;
+    --gruen-hell: #e8f5ee;
+    --orange: #c75e1a;
+    --rot: #c0392b;
+    --grau: #444;
+    --border: #ddd;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    background: #f0f2f5;
+    color: #222;
+    padding: 24px 16px;
+  }
+  header {
+    max-width: 1060px;
+    margin: 0 auto 32px;
+    background: var(--see-blau);
+    color: white;
+    padding: 28px 32px;
+    border-radius: 12px;
+  }
+  header h1 { font-size: 1.6rem; margin-bottom: 6px; }
+  header p { opacity: 0.85; font-size: 0.95rem; }
+  header .sub { margin-top: 12px; background: rgba(255,255,255,0.15); border-radius: 8px; padding: 10px 14px; font-size: 0.85rem; }
+  .badge {
+    display: inline-block;
+    padding: 3px 10px;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    margin-right: 6px;
+  }
+  .badge-warten { background: #fff3cd; color: #856404; }
+  .badge-organisch { background: #d4edda; color: #155724; }
+  .badge-ig { background: #e1306c; color: white; }
+  .badge-fb { background: #1877f2; color: white; }
+  .badge-setup { background: #dee2e6; color: #333; }
+
+  /* Warning / approval box */
+  .approval-box {
+    max-width: 1060px;
+    margin: 0 auto 32px;
+    background: #fffbeb;
+    border: 2px solid #f59e0b;
+    border-radius: 12px;
+    padding: 24px 28px;
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+  }
+  .approval-box .icon { font-size: 2.4rem; flex-shrink: 0; }
+  .approval-box h2 { font-size: 1.05rem; margin-bottom: 8px; color: #92400e; }
+  .approval-box p { font-size: 0.88rem; color: #78350f; line-height: 1.6; }
+  .approval-box .details { margin-top: 10px; font-size: 0.82rem; color: #555; border-top: 1px solid #f0c965; padding-top: 10px; }
+
+  .section-title {
+    max-width: 1060px;
+    margin: 0 auto 16px;
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--grau);
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    padding-left: 4px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  /* Setup assets (profile + cover) */
+  .setup-grid {
+    max-width: 1060px;
+    margin: 0 auto 40px;
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 18px;
+  }
+  @media (max-width: 680px) { .setup-grid { grid-template-columns: 1fr; } }
+
+  .setup-card {
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  }
+  .setup-card .img-wrap {
+    background: #f5f5f5;
+    overflow: hidden;
+    position: relative;
+  }
+  .setup-card .img-wrap img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+  .setup-card .img-wrap .type-chip {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background: rgba(0,0,0,0.6);
+    color: white;
+    border-radius: 6px;
+    padding: 3px 9px;
+    font-size: 0.75rem;
+    font-weight: 600;
+  }
+  .setup-card .body { padding: 14px 16px; }
+  .setup-card .body h3 { font-size: 0.92rem; color: var(--see-blau); margin-bottom: 5px; }
+  .setup-card .body p { font-size: 0.82rem; color: #666; line-height: 1.5; }
+
+  /* Post cards */
+  .posts-grid {
+    max-width: 1060px;
+    margin: 0 auto 40px;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 18px;
+  }
+  .post-card {
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    display: flex;
+    flex-direction: column;
+  }
+  .post-card .image-wrap {
+    position: relative;
+    height: 260px;
+    background: #f5f5f5;
+    overflow: hidden;
+  }
+  .post-card .image-wrap img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .post-card .image-wrap .date-chip {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    background: rgba(0,0,0,0.65);
+    color: white;
+    border-radius: 6px;
+    padding: 4px 10px;
+    font-size: 0.78rem;
+    font-weight: 600;
+  }
+  .post-card .image-wrap .channel-chips {
+    position: absolute;
+    bottom: 12px;
+    right: 12px;
+    display: flex;
+    gap: 5px;
+  }
+  .post-card .body {
+    padding: 16px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .post-card .post-number {
+    font-size: 0.72rem;
+    font-weight: 700;
+    color: var(--see-blau);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+  .post-card .caption {
+    font-size: 0.87rem;
+    line-height: 1.55;
+    color: #333;
+    flex: 1;
+    white-space: pre-line;
+  }
+  .post-card .image-desc {
+    font-size: 0.78rem;
+    color: #777;
+    border-left: 3px solid var(--border);
+    padding-left: 9px;
+  }
+  .check {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 0.73rem;
+    color: var(--gruen);
+    margin-right: 6px;
+  }
+  .check::before { content: '✓'; font-weight: 700; }
+
+  /* Checks box */
+  .checks-box { max-width: 1060px; margin: 0 auto 40px; background: var(--gruen-hell); border-radius: 12px; padding: 20px 24px; }
+  .checks-box h3 { margin-bottom: 12px; color: var(--gruen); font-size: 0.87rem; text-transform: uppercase; letter-spacing: 0.05em; }
+  .checks-list { display: flex; flex-wrap: wrap; gap: 8px; }
+  .check-item { display: flex; align-items: center; gap: 6px; background: white; border-radius: 6px; padding: 5px 11px; font-size: 0.8rem; color: #333; }
+  .check-item::before { content: '✅'; }
+
+  footer { max-width: 1060px; margin: 0 auto; text-align: center; font-size: 0.76rem; color: #999; padding-bottom: 28px; }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>Seegfui Social Start — Freigabe-Vorschau</h1>
+  <p>Facebook-Seite + Instagram · Profil, Cover &amp; erste 4 Posts · SEE-1235</p>
+  <p style="margin-top: 8px; opacity: 0.9; font-size: 0.88rem;">
+    Erstellt: 2026-08-30 &nbsp;|&nbsp;
+    <span class="badge badge-warten">🔏 Freigabe erbeten</span>
+  </p>
+  <div class="sub">
+    <strong>Pflicht-Gate (Board-Direktive Peter, 2026-08-30):</strong>
+    Kein Post, kein Profil-/Cover-Upload ohne Peters explizite Freigabe. Diese Seite ist die Vorlage.
+    Alle Bilder via fal.ai generiert — keine Freistellartefakte.
+  </div>
+</header>
+
+<!-- APPROVAL NOTICE -->
+<div class="approval-box">
+  <div class="icon">🔏</div>
+  <div>
+    <h2>Peter — bitte hier freigeben (oder Änderungswunsch nennen)</h2>
+    <p>
+      Alle Inhalte auf dieser Seite sind <strong>noch nicht veröffentlicht</strong>.
+      Kein Profil-Bild, kein Cover, kein Post geht live, bevor du freigegeben hast.
+      Deine Freigabe läuft über die <code>request_confirmation</code> im Paperclip-Issue
+      SEE-1235. Diese HTML-Seite zeigt, was du freigibst.
+    </p>
+    <div class="details">
+      Organisch, kein Ads-Budget · Alle Bilder: fal-ai/flux/dev (reine Landschafts-/Atmosphäre-Fotos) und fal-ai/bria/background/replace (Model-Shot) ·
+      Kein Bio-Claim · Kein KI-geniertes Text/Druckbild (außer Overlay-Wortmarke)
+    </div>
+  </div>
+</div>
+
+<!-- PROFIL + COVER -->
+<div class="section-title">
+  Setup: Profil &amp; Cover
+  <span class="badge badge-setup">2 Assets · werden einmalig hochgeladen</span>
+  <span class="badge badge-fb">FB</span>
+  <span class="badge badge-ig">IG</span>
+</div>
+
+<div class="setup-grid">
+
+  <!-- Profilbild -->
+  <div class="setup-card">
+    <div class="img-wrap" style="max-height: 260px;">
+      <img src="https://v3b.fal.media/files/b/0aa863cd/xSDjr6scVJBKjVznYEr0n.png"
+           alt="Seegfui Profilbild — Wasseroberfläche Ammersee mit Wortmarke"
+           onerror="this.style.display='none';this.parentElement.style.background='#e5e7eb';this.parentElement.innerHTML+='<p style=padding:20px;color:#999>Bild lädt nicht</p>'">
+      <span class="type-chip">Profilbild 400×400 px</span>
+    </div>
+    <div class="body">
+      <h3>Profilbild — FB &amp; IG (rund beschnitten)</h3>
+      <p>
+        Ruhige Wasseroberfläche des Ammersees, tiefes See-Blau, Seegfui-Wortmarke mittig in Creme.
+        Bei 40–60 px Rendergröße ist ein einzelner Fokus-Punkt (die Marke) das einzig Lesbare.
+        Fal.ai-Modell: <code>fal-ai/flux/dev</code> (keine Freistellung).
+      </p>
+      <p style="margin-top:8px;font-size:0.78rem;color:#888">
+        <span class="check">fal.ai ✓</span>
+        <span class="check">400×400 px ✓</span>
+        <span class="check">Kein Freistell-Artefakt ✓</span>
+      </p>
+    </div>
+  </div>
+
+  <!-- FB Cover -->
+  <div class="setup-card">
+    <div class="img-wrap">
+      <img src="https://v3b.fal.media/files/b/0aa863ae/kAjLQQuyWmvkT0txqB3EB.png"
+           alt="Seegfui Facebook Titelbild — Steg am Ammersee Panorama Morgen"
+           onerror="this.style.display='none';this.parentElement.style.background='#e5e7eb';this.parentElement.innerHTML+='<p style=padding:20px;color:#999>Bild lädt nicht</p>'">
+      <span class="type-chip">FB Titelbild 1640×924 px</span>
+    </div>
+    <div class="body">
+      <h3>Facebook Titelbild (Cover)</h3>
+      <p>
+        Panorama Ammersee Morgen, Holzsteg als Blickführung von links unten in die Weite. Marke „Liab zum See." unten rechts (Overlay-Regel: FB beschneidet mobil stark und legt links das Profilbild darüber → Marke rechts sitzt sicher).
+        Fal.ai-Modell: <code>fal-ai/flux/dev</code>.
+      </p>
+      <p style="margin-top:8px;font-size:0.78rem;color:#888">
+        <span class="check">fal.ai ✓</span>
+        <span class="check">1640×924 px ✓</span>
+        <span class="check">Kein Freistell-Artefakt ✓</span>
+      </p>
+    </div>
+  </div>
+
+</div>
+
+<!-- POSTS -->
+<div class="section-title">
+  Erste Organic Posts (KW36 — 01.–07. Sep)
+  <span class="badge badge-organisch">4 Posts</span>
+  <span class="badge badge-ig">IG</span>
+  <span class="badge badge-fb">FB</span>
+</div>
+
+<div class="posts-grid">
+
+  <!-- Post 1: Morgenstund -->
+  <div class="post-card">
+    <div class="image-wrap">
+      <img src="https://v3b.fal.media/files/b/0aa863aa/KR0SlizHD_v4_v6OqG-rX.png"
+           alt="Ammersee Morgen — Morgenstund hat Wasser im Mund"
+           loading="lazy"
+           onerror="this.style.display='none';this.parentElement.style.background='#e5e7eb'">
+      <span class="date-chip">Startpost 1 — Di 02. Sep · 08:00</span>
+      <div class="channel-chips">
+        <span class="badge badge-ig">IG</span>
+        <span class="badge badge-fb">FB</span>
+      </div>
+    </div>
+    <div class="body">
+      <div class="post-number">Post #1 — Atmosphäre · Ammersee Morgen</div>
+      <div class="caption">Morgenstund hat Wasser im Mund. 🌅
+
+Wenn der Ammersee no schlaft und du scho wach bist — des is die stillste Stund vom ganzen Tag. Koa Eile, koa Larm. Nur du und da See.
+
+Liab zum See. 💙
+👉 seegfui.de
+
+#ammersee #fuenfseenland #seegfui #morgenstimmung #bayern #liabzumsee</div>
+      <div class="image-desc">fal-ai/flux/dev · Atmosphäre, kein Produkt · Kein KI-Label Pflicht (EU-AI-Act gilt nur für Personenbilder/Produktbilder)</div>
+      <div>
+        <span class="check">fal.ai ✓</span>
+        <span class="check">Kein Bio-Claim ✓</span>
+        <span class="check">Kein Produkt ✓</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Post 2: Nix tun -->
+  <div class="post-card">
+    <div class="image-wrap">
+      <img src="https://v3b.fal.media/files/b/0aa863ab/lQGwvtCVaviWjJQseiUgp.png"
+           alt="Füße am Steg Ammersee — Nix tun is a Beschäftigung"
+           loading="lazy"
+           onerror="this.style.display='none';this.parentElement.style.background='#e5e7eb'">
+      <span class="date-chip">Startpost 2 — Do 04. Sep · 18:30</span>
+      <div class="channel-chips">
+        <span class="badge badge-ig">IG</span>
+        <span class="badge badge-fb">FB</span>
+      </div>
+    </div>
+    <div class="body">
+      <div class="post-number">Post #2 — Atmosphäre · Entschleunigung</div>
+      <div class="caption">Nix tun is a Beschäftigung. 🦶💦
+
+Fiaß ins Wasser, Kopf aus. Am Steg kannst nix falsch macha — des is die einzige To-do-Liste, die si von alloa erledigt.
+
+Liab zum See. 💙
+👉 seegfui.de
+
+#ammersee #entschleunigung #seegfui #stegmoment #bayern #liabzumsee</div>
+      <div class="image-desc">fal-ai/flux/dev · Füße am Steg, kein erkennbares Gesicht · Kein KI-Label Pflicht (kein Personenidentifikation)</div>
+      <div>
+        <span class="check">fal.ai ✓</span>
+        <span class="check">Kein Bio-Claim ✓</span>
+        <span class="check">Kein Produkt ✓</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Post 3: Love Hoodie Model -->
+  <div class="post-card">
+    <div class="image-wrap">
+      <img src="https://v3b.fal.media/files/b/0aa863c7/g-_n3JREO4x6gnqROXNt0_9342361343dc456e9054ee5e34f31117.png"
+           alt="Love Hoodie Ammersee Carolinablau — Modell am See"
+           loading="lazy"
+           onerror="this.style.display='none';this.parentElement.style.background='#e5e7eb'">
+      <span class="date-chip">Startpost 3 — Sa 06. Sep · 11:00</span>
+      <div class="channel-chips">
+        <span class="badge badge-ig">IG</span>
+        <span class="badge badge-fb">FB</span>
+      </div>
+    </div>
+    <div class="body">
+      <div class="post-number">Post #3 — Produkt · Love Hoodie Ammersee</div>
+      <div class="caption">Mei See. Mei Gfui. 💙
+
+Der Ammersee is ned bloß a Fleck auf da Landkartn — der is a Gfui, des ma mitnimmt. Drum trogt ma eahm ah.
+
+Liab zum See. 💙
+👉 seegfui.de
+
+#ammersee #seegfui #hoodie #fuenfseenland #bayern #liabzumsee</div>
+      <div class="image-desc">fal-ai/bria/background/replace · Echtes Printful-Mockup bleibt (Aufdruck byte-identisch), nur Studio-Weiß → Ammersee-Kulisse ersetzt. Kein Freistell-Artefakt. 🤖 KI-erstellt (EU-AI-Act Art. 50)</div>
+      <div>
+        <span class="check">fal.ai (bria) ✓</span>
+        <span class="check">Kein Bio-Claim ✓</span>
+        <span class="check">Aufdruck korrekt ✓</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Post 4: Tegernsee Seelenruhe -->
+  <div class="post-card">
+    <div class="image-wrap">
+      <img src="https://v3b.fal.media/files/b/0aa863b1/2P3qs6GRoXxXMTh1TeU_h.png"
+           alt="Tegernsee Alpenkulisse — Seelenruhe kriagst ned im Internet"
+           loading="lazy"
+           onerror="this.style.display='none';this.parentElement.style.background='#e5e7eb'">
+      <span class="date-chip">Startpost 4 — nächste Woche · geplant</span>
+      <div class="channel-chips">
+        <span class="badge badge-ig">IG</span>
+        <span class="badge badge-fb">FB</span>
+      </div>
+    </div>
+    <div class="body">
+      <div class="post-number">Post #4 — Atmosphäre · Tegernsee (Mehrsee-Start)</div>
+      <div class="caption">Seelenruhe kriagst ned im Internet. ⛰️💙
+
+De gibt's nur do, wo da Berg ins Wasser schaut. Tegernsee, spata Nachmittag — mehr brauchst ned.
+
+Liab zum See. 💙
+👉 seegfui.de
+
+#tegernsee #seegfui #seelenruhe #oberbayern #bergeundsee #liabzumsee</div>
+      <div class="image-desc">fal-ai/flux/dev · Tegernsee mit echter Alpenkette (§8.7-konform: Kulisse muss zum aufgedruckten See passen) · Kein Produkt</div>
+      <div>
+        <span class="check">fal.ai ✓</span>
+        <span class="check">Kein Bio-Claim ✓</span>
+        <span class="check">See-Kulisse konform ✓</span>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- CHECKS -->
+<div class="checks-box">
+  <h3>✅ Pflicht-Leitplanken geprüft</h3>
+  <div class="checks-list">
+    <div class="check-item">Alle 6 Bilder via fal.ai — keine Freistellartefakte (Board-Direktive Peter 2026-08-30)</div>
+    <div class="check-item">Kein Bio-/Öko-Claim in allen Captions (SEE-4450/4451)</div>
+    <div class="check-item">Post #3 (Model): EU-AI-Act Art. 50 — Caption mit „KI-erstellt" markiert ✓</div>
+    <div class="check-item">Post #1+2+4: Atmosphäre-Bilder ohne Personen-Identifikation → kein EU-AI-Act-Label nötig</div>
+    <div class="check-item">Kein Ads-Budget — nur organisch, kein Spend</div>
+    <div class="check-item">Profilbild &amp; Cover werden einmalig hochgeladen (Klickpfad via Meta Business Suite)</div>
+    <div class="check-item">Kein Post geht live ohne Peters Accept auf SEE-1235 (request_confirmation)</div>
+  </div>
+</div>
+
+<!-- SECOND APPROVAL REMINDER -->
+<div class="approval-box">
+  <div class="icon">🔏</div>
+  <div>
+    <h2>Freigabe erbeten — Peter (Board/CEO)</h2>
+    <p>
+      Profil-Bild, Cover und die 4 Startposts (Atmosphäre + erster Produkt-Post Love Hoodie) warten auf dein OK.
+      Freigabe erteilst du über die <strong>request_confirmation</strong> im Paperclip-Issue <strong>SEE-1235</strong>.
+    </p>
+    <div class="details">
+      <strong>Was nach deiner Freigabe passiert:</strong><br>
+      1. Profilbild + Cover → Peter lädt selbst hoch (Meta-Login nötig) per Go-Live-Checkliste.<br>
+      2. Posts #1–4 → CMO bereitet Posting-Script vor, feuert erst nach Accept.
+      <br><br>
+      <strong>Was OHNE deine Freigabe niemals passiert:</strong>
+      Kein Upload, kein Post, keine Ad.
+    </div>
+  </div>
+</div>
+
+<footer>
+  Seegfui Social Start · SEE-1235 · Freigabe-Preview Rev 1 · Stand: 2026-08-30 · Board-Direktive: HTML-Vorlage vor jedem Post (Peter 2026-08-19 + 2026-08-30)
+</footer>
+
+</body>
+</html>
