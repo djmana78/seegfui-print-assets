@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Seegfui Wochenplan KW37 – 07. Sep – 12. Sep 2026 (Rev 2)</title>
+<title>Seegfui Wochenplan KW37 – 07. Sep – 12. Sep 2026 (Rev 3)</title>
 <style>
   :root {
     --see-blau: #1a6e8a;
@@ -279,21 +279,21 @@
 <body>
 
 <header>
-  <h1>Wochenplan KW37 — Content &amp; Ads <span style="font-size:0.85rem;opacity:0.8">(Rev 2)</span></h1>
+  <h1>Wochenplan KW37 — Content &amp; Ads <span style="font-size:0.85rem;opacity:0.8">(Rev 3)</span></h1>
   <p>07. September bis 12. September 2026 &nbsp;|&nbsp; Seegfui Marketing &nbsp;|&nbsp;
     <span class="badge badge-warten">🔏 Freigabe erbeten</span>
   </p>
   <p style="margin-top:10px;opacity:0.9;font-size:0.88rem">
-    4 Posts (Mo/Mi/Fr/Sa) · Sonnengfui Tasse + T-Shirt + Seehnsucht (blockiert) + Am See dahoam · Meta Ads · Budget max. 42 €
+    4 Posts (Mo/Mi/Fr/Sa) · Sonnengfui Tasse + Sonn-und-See T-Shirt + Seehnsucht T-Shirt + Am See dahoam · Meta Ads · Budget max. 42 €
   </p>
 </header>
 
 <!-- REVISION NOTE -->
 <div class="revision-banner">
-  <strong>Rev 2 — Angepasst nach Peter-Feedback (2026-09-04):</strong>
-  Mehr Abwechslung: Sonnengfui Tasse neu (P1), Seehnsucht T-Shirt eingebaut (P3, blockiert bis Lifestyle-Bild bereit),
-  „Am See dahoam" auf 1 Post reduziert (P4 Sa). P2 Sonn-und-See bleibt.
-  KreativAgent-Issue für Seehnsucht-Lifestyle-Bild (Deadline Do 10.09.) wird parallel angelegt.
+  <strong>Rev 3 — P3 entblockt (2026-09-04, SEE-7425):</strong>
+  Lifestyle-Bild SEEHNSUCHT Tegernsee Anthrazit auf CDN live (md5 <code>4a1e5e69</code>, HTTP 200, 1080×1350).
+  Gates: <code>social_image_gate.py</code> exit 0 · <code>overlay_gate.py</code> exit 0.
+  Alle 4 Posts bereit. Rev 2: Mehr Abwechslung nach Peter-Feedback — Sonnengfui Tasse (P1), Seehnsucht (P3), Am See dahoam auf 1× (P4).
 </div>
 
 <!-- GUARDRAIL CHECKS -->
@@ -301,10 +301,10 @@
   <h3>Guardrail-Checks</h3>
   <div class="checks-list">
     <div class="check-item">Kein Bio-/Öko-Claim in allen Captions</div>
-    <div class="check-item">KI-Label (EU-AI-Act Art. 50) bei P2</div>
+    <div class="check-item">KI-Label (EU-AI-Act Art. 50) bei P2 und P3</div>
     <div class="check-item">Live-Preise WC-REST geprüft 2026-09-04</div>
-    <div class="check-item">P1/P2/P4 Bilder CDN HTTP 200 ✅</div>
-    <div class="check-item warn">P3 Seehnsucht BLOCKED — Lifestyle-Bild fehlt (KreativAgent)</div>
+    <div class="check-item">Alle 4 Bilder CDN HTTP 200 ✅ (P3 SEE-7425)</div>
+    <div class="check-item">P3 social_image_gate.py exit 0 · overlay_gate.py exit 0</div>
     <div class="check-item">UTM-Parameter (kebab-case, Kleinschreibung)</div>
     <div class="check-item">Spend-Gate: Ads-Budget in dieser Freigabe</div>
   </div>
@@ -322,8 +322,7 @@
 <!-- ORGANISCHE POSTS -->
 <div class="section-title">
   Organische Posts
-  <span class="badge badge-organisch">3 bereit</span>
-  <span class="badge badge-blocked">1 blockiert (P3 Seehnsucht)</span>
+  <span class="badge badge-organisch">4 bereit ✓</span>
 </div>
 
 <div class="posts-grid">
@@ -391,35 +390,35 @@
     </div>
   </div>
 
-  <!-- P3: Fr 11.09. — SEEHNSUCHT T-Shirt Tegernsee — BLOCKED -->
-  <div class="post-card blocked">
-    <div class="image-wrap" style="background:#fde8e8">
-      <div class="blocked-overlay">
-        <div class="blocked-banner">⚠ BLOCKIERT</div>
-      </div>
-      <span class="date-chip" style="background:rgba(185,28,28,0.8)">Fr 11. Sep · 18:30</span>
+  <!-- P3: Fr 11.09. — SEEHNSUCHT T-Shirt Tegernsee — ENTBLOCKT -->
+  <div class="post-card">
+    <div class="image-wrap">
+      <img src="https://cdn.jsdelivr.net/gh/djmana78/seegfui-print-assets@7eb4a8b8d385fdb8d041979bdb9eb7a728983da9/social/see7425/tee-seehnsucht-tegernsee-anthrazit-lifestyle_overlay.jpg"
+           alt="SEEHNSUCHT Tegernsee Unisex T-Shirt Anthrazit Lifestyle fal.ai KI-erstellt" loading="lazy"
+           onerror="this.style.display='none';this.parentElement.style.background='#e5e7eb'">
+      <span class="date-chip">Fr 11. Sep · 18:30</span>
       <div class="channel-chips">
         <span class="badge badge-ig">IG</span>
         <span class="badge badge-fb">FB</span>
       </div>
     </div>
     <div class="body">
-      <div class="post-number" style="color:var(--rot)">Post #3 — SEEHNSUCHT T-Shirt Tegernsee <span class="price-chip">34,90 €</span></div>
-      <div class="caption" style="color:#555">
-        <strong style="color:var(--rot)">Blockiert — Lifestyle-Bild fehlt auf CDN.</strong><br><br>
-        Geplanter Caption-Entwurf:<br>
+      <div class="post-number">Post #3 — SEEHNSUCHT T-Shirt Tegernsee Anthrazit <span class="price-chip">34,90 €</span></div>
+      <div class="caption">
         Seehnsucht. Des Wort sagt alles. 🌊<br><br>
-        Das SEEHNSUCHT-T-Shirt für den Tegernsee — für alle, denen der See nicht aus dem Kopf geht. Angenehm zu tragen, hochwertig, bairisch.<br><br>
+        Das SEEHNSUCHT-T-Shirt für den Tegernsee — für alle, denen der See nicht aus dem Kopf geht. Anthrazit mit See-Blau, bairisch, hochwertig.<br><br>
         👉 Link in Bio · seegfui.de/t-shirts<br><br>
+        <em style="color:#777;font-size:0.82rem">🤖 KI-erstellt (EU-AI-Act Art. 50)</em><br>
         <em style="color:#999">#tegernsee #seehnsucht #liabzumsee #tshirt #fünfseenland #seegfui #heimat #seeliebe</em>
       </div>
-      <div class="image-desc" style="border-color:var(--rot);color:var(--rot)">
-        ⚠ Lifestyle-Bild (fal.ai) noch nicht auf CDN — KreativAgent-Issue wird angelegt (Deadline: Do 10.09. 18:00)
-      </div>
+      <div class="image-desc">fal.ai Lifestyle · SEE-7425 · SEEHNSUCHT Tegernsee Anthrazit × See-Blau · <strong>🤖 KI-erstellt (EU-AI-Act Art. 50)</strong></div>
+      <div class="utm-line">UTM: ?utm_source=instagram&amp;utm_medium=post&amp;utm_campaign=shirt-spotlight&amp;utm_content=tegernsee-seehnsucht-anthrazit</div>
       <div class="check-row">
         <span class="check">Kein Bio-Claim</span>
+        <span class="check">KI-Label ✓</span>
         <span class="check">Preis 34,90 € ✓</span>
-        <span class="check-blocked">Bild FEHLT — KreativAgent-Issue offen</span>
+        <span class="check">Bild CDN live ✓ (SEE-7425)</span>
+        <span class="check">Gates grün ✓</span>
       </div>
     </div>
   </div>
@@ -527,13 +526,13 @@
 <div class="approval-box">
   <div class="icon">🔏</div>
   <div>
-    <h2>Freigabe erbeten — KW37 Rev 2 (07.–12. September 2026)</h2>
+    <h2>Freigabe erbeten — KW37 Rev 3 (07.–12. September 2026)</h2>
     <p>
-      <strong>3 Posts sofort bereit</strong> (P1 Sonnengfui Tasse, P2 Sonn-und-See T-Shirt, P4 Am See dahoam Tasse) + <strong>1 Post blockiert</strong> (P3 Seehnsucht Fr 11.09. — Lifestyle-Bild KreativAgent in Arbeit, Deadline Do 10.09.).<br>
+      <strong>Alle 4 Posts bereit</strong>: P1 Sonnengfui Tasse (Mo), P2 Sonn-und-See T-Shirt (Mi), P3 SEEHNSUCHT T-Shirt Tegernsee (Fr, SEE-7425 ✓), P4 Am See dahoam Tasse (Sa).<br>
       Meta-Kampagne Fortsetzung max. <strong>42 € KW37</strong>.
     </p>
     <div class="details">
-      Bei Acceptance: P1/P2/P4 sofort planen. P3 Seehnsucht geht erst live wenn Lifestyle-Bild CDN-live ist (Do 10.09.).<br>
+      Bei Acceptance: alle 4 Posts planen (Mo/Mi/Fr 18:30 + Sa 11:00 CEST). P3 KI-Label im Caption gesetzt.<br>
       Bitte akzeptieren oder Änderungswünsche als Kommentar auf SEE-7350.
     </div>
   </div>
@@ -541,7 +540,7 @@
 
 <!-- ZUSAMMENFASSUNG -->
 <div style="max-width:1060px;margin:0 auto 40px;background:white;border-radius:12px;padding:20px 24px;box-shadow:0 2px 8px rgba(0,0,0,0.08)">
-  <strong style="font-size:0.92rem;color:var(--see-blau)">KW37 Rev 2 — Übersicht (Mehr Abwechslung + Seehnsucht)</strong>
+  <strong style="font-size:0.92rem;color:var(--see-blau)">KW37 Rev 3 — Übersicht (Alle 4 Posts bereit)</strong>
   <table style="width:100%;border-collapse:collapse;margin-top:12px;font-size:0.83rem">
     <thead>
       <tr style="background:#f0f2f5;font-weight:700;font-size:0.75rem;text-transform:uppercase;letter-spacing:0.05em">
@@ -570,13 +569,13 @@
         <td style="padding:8px"><strong>34,90 €</strong></td>
         <td style="padding:8px;color:var(--gruen)">SEE-5875 fal.ai ✓</td>
       </tr>
-      <tr style="border-top:1px solid #eee;background:#fef2f2">
+      <tr style="border-top:1px solid #eee">
         <td style="padding:8px;font-weight:700">P3</td>
         <td style="padding:8px">Fr 11.09. 18:30</td>
-        <td style="padding:8px"><strong>SEEHNSUCHT</strong> T-Shirt Unisex</td>
+        <td style="padding:8px"><strong>SEEHNSUCHT</strong> T-Shirt Unisex Anthrazit</td>
         <td style="padding:8px">Tegernsee</td>
         <td style="padding:8px"><strong>34,90 €</strong></td>
-        <td style="padding:8px;color:var(--rot)">⚠ BLOCKED — KreativAgent</td>
+        <td style="padding:8px;color:var(--gruen)">SEE-7425 CDN ✓ KI-Label ✓</td>
       </tr>
       <tr style="border-top:1px solid #eee">
         <td style="padding:8px;font-weight:700">P4</td>
@@ -594,13 +593,13 @@
     </tbody>
   </table>
   <div style="margin-top:12px;font-size:0.8rem;color:#666">
-    <strong>Motiv-Mix KW37:</strong> Sonnengfui (neu) · Sonn und See · SEEHNSUCHT (neu, blockiert) · Am See dahoam (1×, reduziert von 2)
+    <strong>Motiv-Mix KW37:</strong> Sonnengfui (Tasse) · Sonn und See (T-Shirt Weiß) · SEEHNSUCHT (T-Shirt Anthrazit) · Am See dahoam (Tasse)
   </div>
 </div>
 
 <footer>
-  Seegfui Wochenplan KW37 Rev 2 · erstellt CMO · 2026-09-04 · SEE-7350<br>
-  Preise verifiziert via WC Store REST API 2026-09-04 · Rev 2: Mehr Abwechslung nach Peter-Feedback
+  Seegfui Wochenplan KW37 Rev 3 · erstellt CMO · 2026-09-04 · SEE-7350<br>
+  Preise verifiziert via WC Store REST API 2026-09-04 · Rev 3: P3 SEEHNSUCHT entblockt (SEE-7425)
 </footer>
 
 </body>
