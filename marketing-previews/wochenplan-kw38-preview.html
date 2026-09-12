@@ -307,7 +307,7 @@
 <div class="format-note">
   <strong>📱 Format-Test KW38:</strong> P2 (Mi 16.09.) wird als <strong>Carousel</strong> umgesetzt — 3 Slides, je ein See.
   Begründung (SEE-6895): 6 Tage Funkstille (07.–12.09.) kosten Non-Follower-Reichweite; Reels/Carousels sind die einzigen Formate mit echter Nicht-Follower-Distribution.
-  Die Posting-Infrastruktur (Meta Graph API Carousel-Upload) muss CTO bis <strong>Mi 16.09. 12:00</strong> bereitstellen — falls nicht rechtzeitig, fällt P2 auf Einzelbild zurück und Carousel-Test wandert in KW39.
+  Carousel-Upload-Infrastruktur (Meta Graph API): ✅ <strong>bereit</strong> — SEE-8993 erledigt, PR #803 (commit 7e41ba0d), 4 Tage vor Deadline. Kein Fallback auf Einzelbild nötig.
 </div>
 
 <!-- GUARDRAIL CHECKS -->
@@ -318,7 +318,7 @@
     <div class="check-item">KI-Label (EU-AI-Act Art. 50) bei P3 und P4 (KI-Lifestyle geplant)</div>
     <div class="check-item">Live-Preise WC-REST geprüft 2026-09-12</div>
     <div class="check-item">P1: CDN HTTP 200 · social_image_gate exit 0 · overlay_gate exit 0 ✅</div>
-    <div class="check-item">P2-S1/S2: CDN HTTP 200 · beide Gates exit 0 ✅</div>
+    <div class="check-item">P2 Carousel (3 Slides): CDN HTTP 200 · beide Gates exit 0 · SHA-gepinnt @62b4444 ✅ (SEE-8993 done, PR #803)</div>
     <div class="check-item">P3: CDN HTTP 200 · social_image_gate exit 0 · overlay_gate exit 0 ✅ (SEE-8991 done, 2026-09-12)</div>
     <div class="check-item">P4: CDN HTTP 200 · social_image_gate exit 0 · overlay_gate exit 0 ✅ (SEE-8992 done, 2026-09-12)</div>
     <div class="check-item">UTM-Parameter (kebab-case, Kleinschreibung) — SEE-1226</div>
@@ -347,7 +347,7 @@
   <!-- P1: Mo 14.09. — Sonnengfui Tegernsee Emaille-Tasse Petrol (CEO-gesetzt) -->
   <div class="post-card">
     <div class="image-wrap">
-      <img src="https://cdn.jsdelivr.net/gh/djmana78/seegfui-print-assets/social/see8987/kw38-p1-tegernsee-petrol_overlay.png"
+      <img src="https://cdn.jsdelivr.net/gh/djmana78/seegfui-print-assets@62b4444db9ae16ccbda2d4107dc046f1cb83c913/social/see8987/kw38-p1-tegernsee-petrol_overlay.png"
            alt="Sonnengfui Tegernsee Emaille-Tasse Petrol" loading="lazy"
            onerror="this.style.display='none';this.parentElement.style.background='#e5e7eb'">
       <span class="date-chip">Mo 14. Sep · 18:30 CEST</span>
@@ -367,7 +367,7 @@
       <div class="image-desc">Lifestyle-Bild: Sonnengfui Tegernsee Petrol Tasse, Griff rechts — CDN see8987 kw38-p1 ✅</div>
       <div class="utm-line">UTM: utm_source=instagram&amp;utm_medium=organic&amp;utm_campaign=kw38&amp;utm_content=sonnengfui-tegernsee-tasse-p1</div>
       <div class="check-row">
-        <span class="check">CDN HTTP 200</span>
+        <span class="check">CDN HTTP 200 (SHA-gepinnt)</span>
         <span class="check">social_image_gate exit 0</span>
         <span class="check">overlay_gate exit 0</span>
         <span class="check">Kein KI-Label (kein KI-Bild)</span>
@@ -380,13 +380,13 @@
   <div class="post-card" style="border: 2px solid #7c3aed;">
     <div style="position:relative;">
       <div class="carousel-slides">
-        <img src="https://cdn.jsdelivr.net/gh/djmana78/seegfui-print-assets/social/see8987/kw38-p2s1-ammersee-petrol_overlay.png"
+        <img src="https://cdn.jsdelivr.net/gh/djmana78/seegfui-print-assets@62b4444db9ae16ccbda2d4107dc046f1cb83c913/social/see8987/kw38-p2s1-ammersee-petrol_overlay.png"
              alt="Sonnengfui Ammersee Petrol" loading="lazy"
              onerror="this.style.display='none'">
-        <img src="https://cdn.jsdelivr.net/gh/djmana78/seegfui-print-assets/social/see8987/kw38-p2s2-starnberger-petrol_overlay.png"
+        <img src="https://cdn.jsdelivr.net/gh/djmana78/seegfui-print-assets@62b4444db9ae16ccbda2d4107dc046f1cb83c913/social/see8987/kw38-p2s2-starnberger-petrol_overlay.png"
              alt="Sonnengfui Starnberger See Petrol" loading="lazy"
              onerror="this.style.display='none'">
-        <img src="https://cdn.jsdelivr.net/gh/djmana78/seegfui-print-assets/social/see8987/kw38-p1-tegernsee-petrol_overlay.png"
+        <img src="https://cdn.jsdelivr.net/gh/djmana78/seegfui-print-assets@62b4444db9ae16ccbda2d4107dc046f1cb83c913/social/see8987/kw38-p1-tegernsee-petrol_overlay.png"
              alt="Sonnengfui Tegernsee Petrol" loading="lazy"
              onerror="this.style.display='none'">
         <span class="date-chip" style="position:absolute;top:12px;left:12px">Mi 16. Sep · 18:30 CEST</span>
@@ -408,13 +408,14 @@
       </div>
       <div class="image-desc">
         Carousel 3 Slides: Ammersee Petrol / Starnberger See Petrol / Tegernsee Petrol — alle mit Seegfui-Overlay.<br>
-        <strong style="color:#7c3aed">Infra-Bedingung:</strong> CTO muss Carousel-Upload (Meta Graph API) bis Mi 16.09. 12:00 bereitstellen. Fallback: Einzelbild Slide 1 (Ammersee), Carousel→KW39.
+        Carousel-Upload (Meta Graph API): ✅ <strong style="color:#16a34a">bereit</strong> — SEE-8993 erledigt (PR #803, 7e41ba0d). 3 Slides SHA-gepinnt (@62b4444). Kein Fallback nötig.
       </div>
       <div class="utm-line">UTM: utm_source=instagram&amp;utm_medium=organic&amp;utm_campaign=kw38&amp;utm_content=sonnengfui-3seen-carousel-p2</div>
       <div class="check-row">
         <span class="check">Alle 3 Slides: CDN HTTP 200</span>
         <span class="check">social_image_gate exit 0</span>
         <span class="check">overlay_gate exit 0</span>
+        <span class="check">SHA-gepinnt @62b4444</span>
         <span class="check">Kein KI-Label (kein KI-Bild)</span>
         <span class="check">Live-Preis 19,90 €</span>
       </div>
@@ -560,15 +561,16 @@
       · P1–P4 Bilder: ✅ alle CDN-live, beide Gates exit 0, SHA-gepinnt<br>
       · P3 (SEE-8991, 2026-09-12): Sonn-und-See Ammersee T-Shirt weiß · KI-erstellt<br>
       · P4 (SEE-8992, 2026-09-12): Seehnsucht Starnberger See Hoodie navy · KI-erstellt<br>
-      · P2 Carousel: CTO-Ticket für Meta Graph API Carousel-Upload (Fallback: Einzelbild → Carousel KW39)<br>
+      · P2 Carousel: ✅ bereit (SEE-8993, PR #803, SHA-gepinnt @62b4444)<br>
       · Ads Kill-Entscheid: Check #2 am 15.09. bei SEE-7863 — bei ROAS 0 → Kampagne pausieren
     </div>
   </div>
 </div>
 
 <footer>
-  Seegfui Wochenplan KW38 · SEE-8987 · erstellt 2026-09-12 · aktualisiert 2026-09-12 P3 BEREIT (SEE-8991) · CMO Agent
+  Seegfui Wochenplan KW38 · SEE-8987 · erstellt 2026-09-12 · aktualisiert 2026-09-12 P2-Carousel BEREIT (SEE-8993), alle URLs SHA-gepinnt · CMO Agent
 </footer>
 
 </body>
 </html>
+
