@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Seegfui Wochenplan KW38 – 14. Sep – 19. Sep 2026</title>
+<style>
+  :root {
+    --see-blau: #1a6e8a;
+    --see-blau-hell: #e8f4f8;
+    --gruen: #2d7a47;
+    --gruen-hell: #e8f5ee;
+    --orange: #c75e1a;
+    --rot: #b91c1c;
+    --rot-hell: #fde8e8;
+    --grau: #444;
+    --border: #ddd;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    background: #f0f2f5;
+    color: #222;
+    padding: 24px 16px;
+  }
+  header {
+    max-width: 1060px;
+    margin: 0 auto 32px;
+    background: var(--see-blau);
+    color: white;
+    padding: 28px 32px;
+    border-radius: 12px;
+  }
+  header h1 { font-size: 1.6rem; margin-bottom: 6px; }
+  header p { opacity: 0.85; font-size: 0.95rem; }
+  .badge {
+    display: inline-block;
+    padding: 3px 10px;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    margin-right: 6px;
+  }
+  .badge-warten { background: #fff3cd; color: #856404; }
+  .badge-organisch { background: #d4edda; color: #155724; }
+  .badge-paid { background: #d1ecf1; color: #0c5460; }
+  .badge-ig { background: #e1306c; color: white; }
+  .badge-fb { background: #1877f2; color: white; }
+  .badge-blocked { background: var(--rot-hell); color: var(--rot); }
+  .badge-carousel { background: #7c3aed; color: white; }
+  .section-title {
+    max-width: 1060px;
+    margin: 0 auto 16px;
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--grau);
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    padding-left: 4px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .posts-grid {
+    max-width: 1060px;
+    margin: 0 auto 40px;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 18px;
+  }
+  .post-card {
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    display: flex;
+    flex-direction: column;
+  }
+  .post-card.blocked {
+    border: 2px solid var(--rot);
+    opacity: 0.9;
+  }
+  .post-card .image-wrap {
+    position: relative;
+    height: 260px;
+    background: #f5f5f5;
+    overflow: hidden;
+  }
+  .post-card .image-wrap img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .post-card .image-wrap .date-chip {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    background: rgba(0,0,0,0.65);
+    color: white;
+    border-radius: 6px;
+    padding: 4px 10px;
+    font-size: 0.78rem;
+    font-weight: 600;
+  }
+  .post-card .image-wrap .channel-chips {
+    position: absolute;
+    bottom: 12px;
+    right: 12px;
+    display: flex;
+    gap: 5px;
+  }
+  .blocked-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(185,28,28,0.12);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .blocked-banner {
+    background: var(--rot);
+    color: white;
+    font-weight: 800;
+    font-size: 1rem;
+    padding: 10px 20px;
+    border-radius: 8px;
+    letter-spacing: 0.06em;
+  }
+  .carousel-slides {
+    display: flex;
+    height: 260px;
+    overflow: hidden;
+    position: relative;
+  }
+  .carousel-slides img {
+    width: 33.33%;
+    height: 100%;
+    object-fit: cover;
+    border-right: 2px solid white;
+    flex-shrink: 0;
+  }
+  .carousel-label {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    background: #7c3aed;
+    color: white;
+    border-radius: 6px;
+    padding: 3px 8px;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+  }
+  .post-card .body {
+    padding: 16px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .post-card .post-number {
+    font-size: 0.72rem;
+    font-weight: 700;
+    color: var(--see-blau);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+  .post-card .caption {
+    font-size: 0.88rem;
+    line-height: 1.55;
+    color: #333;
+    flex: 1;
+  }
+  .post-card .image-desc {
+    font-size: 0.78rem;
+    color: #777;
+    border-left: 3px solid var(--border);
+    padding-left: 9px;
+  }
+  .post-card .utm-line {
+    font-size: 0.72rem;
+    color: #999;
+    word-break: break-all;
+  }
+  .post-card .check-row {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+  }
+  .check {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 0.73rem;
+    color: var(--gruen);
+  }
+  .check::before { content: '✓'; font-weight: 700; }
+  .check-blocked {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 0.73rem;
+    color: var(--rot);
+  }
+  .check-blocked::before { content: '⚠'; font-weight: 700; }
+  .price-chip {
+    display: inline-block;
+    background: #fff3e0;
+    color: #e65100;
+    border-radius: 4px;
+    padding: 2px 8px;
+    font-size: 0.78rem;
+    font-weight: 700;
+  }
+  /* Ads section */
+  .ads-box {
+    max-width: 1060px;
+    margin: 0 auto 40px;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    overflow: hidden;
+  }
+  .ads-box .ads-header {
+    background: var(--see-blau);
+    color: white;
+    padding: 18px 24px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .ads-box .ads-header h2 { font-size: 1.05rem; }
+  .ads-body { padding: 24px; }
+  .ads-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 16px;
+    margin-bottom: 20px;
+  }
+  .kpi-card {
+    background: var(--see-blau-hell);
+    border-radius: 8px;
+    padding: 14px;
+    text-align: center;
+  }
+  .kpi-card.warn { background: #fde8e8; }
+  .kpi-card .value {
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: var(--see-blau);
+    display: block;
+  }
+  .kpi-card.warn .value { color: var(--rot); }
+  .kpi-card .label {
+    font-size: 0.78rem;
+    color: #555;
+    margin-top: 4px;
+  }
+  .rule-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 14px; }
+  .rule-box { padding: 12px 14px; border-radius: 8px; font-size: 0.83rem; }
+  .rule-box.kill { background: var(--rot-hell); }
+  .rule-box.scale { background: var(--gruen-hell); }
+  .rule-box .rule-label { font-weight: 700; font-size: 0.73rem; text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 4px; }
+  .rule-box.kill .rule-label { color: #c0392b; }
+  .rule-box.scale .rule-label { color: var(--gruen); }
+  /* Approval */
+  .approval-box {
+    max-width: 1060px;
+    margin: 0 auto 40px;
+    background: #fffbeb;
+    border: 2px solid #f59e0b;
+    border-radius: 12px;
+    padding: 24px 28px;
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+  }
+  .approval-box .icon { font-size: 2.2rem; flex-shrink: 0; }
+  .approval-box h2 { font-size: 1.05rem; margin-bottom: 7px; color: #92400e; }
+  .approval-box p { font-size: 0.88rem; color: #78350f; line-height: 1.5; }
+  .approval-box .details { margin-top: 10px; font-size: 0.82rem; color: #555; }
+  /* Checks */
+  .checks-box { max-width: 1060px; margin: 0 auto 40px; background: var(--gruen-hell); border-radius: 12px; padding: 20px 24px; }
+  .checks-box h3 { margin-bottom: 12px; color: var(--gruen); font-size: 0.87rem; text-transform: uppercase; letter-spacing: 0.05em; }
+  .checks-list { display: flex; flex-wrap: wrap; gap: 8px; }
+  .check-item { display: flex; align-items: center; gap: 6px; background: white; border-radius: 6px; padding: 5px 11px; font-size: 0.8rem; color: #333; }
+  .check-item::before { content: '✅'; }
+  .check-item.warn::before { content: '⚠️'; }
+  footer { max-width: 1060px; margin: 0 auto; text-align: center; font-size: 0.76rem; color: #999; padding-bottom: 28px; }
+  .format-note { background: #f5f3ff; border: 2px solid #7c3aed; border-radius: 10px; padding: 14px 20px; margin: 0 auto 28px; max-width: 1060px; font-size: 0.88rem; color: #4c1d95; }
+  .format-note strong { color: #5b21b6; }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>Wochenplan KW38 — Content &amp; Ads</h1>
+  <p>14. September bis 19. September 2026 &nbsp;|&nbsp; Seegfui Marketing &nbsp;|&nbsp;
+    <span class="badge badge-warten">🔏 Freigabe erbeten</span>
+  </p>
+  <p style="margin-top:10px;opacity:0.9;font-size:0.88rem">
+    4 Posts (Mo/Mi/Fr/Sa) · Sonnengfui Tegernsee Tasse (gesetzt) + 3-Seen-Carousel (Format-Test) + Sonn-und-See T-Shirt Ammersee + Seehnsucht Hoodie Starnberger See · Meta Ads Phase 2 (kein neues Budget)
+  </p>
+</header>
+
+<!-- FORMAT-TEST HINWEIS -->
+<div class="format-note">
+  <strong>📱 Format-Test KW38:</strong> P2 (Mi 16.09.) wird als <strong>Carousel</strong> umgesetzt — 3 Slides, je ein See.
+  Begründung (SEE-6895): 6 Tage Funkstille (07.–12.09.) kosten Non-Follower-Reichweite; Reels/Carousels sind die einzigen Formate mit echter Nicht-Follower-Distribution.
+  Die Posting-Infrastruktur (Meta Graph API Carousel-Upload) muss CTO bis <strong>Mi 16.09. 12:00</strong> bereitstellen — falls nicht rechtzeitig, fällt P2 auf Einzelbild zurück und Carousel-Test wandert in KW39.
+</div>
+
+<!-- GUARDRAIL CHECKS -->
+<div class="checks-box" style="margin-bottom:28px">
+  <h3>Guardrail-Checks</h3>
+  <div class="checks-list">
+    <div class="check-item">Kein Bio-/Öko-Claim in allen Captions (SEE-4452)</div>
+    <div class="check-item">KI-Label (EU-AI-Act Art. 50) bei P3 und P4 (KI-Lifestyle geplant)</div>
+    <div class="check-item">Live-Preise WC-REST geprüft 2026-09-12</div>
+    <div class="check-item">P1: CDN HTTP 200 · social_image_gate exit 0 · overlay_gate exit 0 ✅</div>
+    <div class="check-item">P2-S1/S2: CDN HTTP 200 · beide Gates exit 0 ✅</div>
+    <div class="check-item warn">P3 + P4: Lifestyle-Bild fehlt → KreativAgent-Issues geplant (Deadline Do 17.09. 18:00)</div>
+    <div class="check-item">UTM-Parameter (kebab-case, Kleinschreibung) — SEE-1226</div>
+    <div class="check-item">Spend-Gate: kein neues Budget — bestehende Ads-Kampagne in Freigabe genannt</div>
+  </div>
+</div>
+
+<!-- LIVE-PREIS-BELEG -->
+<div style="max-width:1060px;margin:0 auto 28px;background:white;border-radius:10px;padding:16px 20px;box-shadow:0 1px 4px rgba(0,0,0,0.06);font-size:0.82rem;color:#444">
+  <strong style="color:var(--see-blau)">Live-Preis-Beleg (Board-Direktive SEE-6032)</strong> &nbsp;|&nbsp; Abgerufen: 2026-09-12 via WC Store REST API<br>
+  <code style="font-size:0.78rem;color:#555">sonnengfui-tegernsee-emaille-tasse → 1990 Cent = <strong>19,90 €</strong></code><br>
+  <code style="font-size:0.78rem;color:#555">sonnengfui-ammersee-emaille-tasse → 1990 Cent = <strong>19,90 €</strong></code><br>
+  <code style="font-size:0.78rem;color:#555">sonnengfui-starnberger-see-emaille-tasse → 1990 Cent = <strong>19,90 €</strong></code><br>
+  <code style="font-size:0.78rem;color:#555">sonn-und-see-ammersee-unisex-organic-t-shirt → 3490 Cent = <strong>34,90 €</strong></code><br>
+  <code style="font-size:0.78rem;color:#555">seehnsucht-starnberger-see-unisex-hoodie → 6390 Cent = <strong>63,90 €</strong></code>
+</div>
+
+<!-- ORGANISCHE POSTS -->
+<div class="section-title">
+  Organische Posts
+  <span class="badge badge-organisch">2 bereit ✓</span>
+  <span class="badge badge-blocked">2 Bild fehlt ⚠</span>
+</div>
+
+<div class="posts-grid">
+
+  <!-- P1: Mo 14.09. — Sonnengfui Tegernsee Emaille-Tasse Petrol (CEO-gesetzt) -->
+  <div class="post-card">
+    <div class="image-wrap">
+      <img src="https://cdn.jsdelivr.net/gh/djmana78/seegfui-print-assets/social/see8987/kw38-p1-tegernsee-petrol_overlay.png"
+           alt="Sonnengfui Tegernsee Emaille-Tasse Petrol" loading="lazy"
+           onerror="this.style.display='none';this.parentElement.style.background='#e5e7eb'">
+      <span class="date-chip">Mo 14. Sep · 18:30 CEST</span>
+      <div class="channel-chips">
+        <span class="badge badge-ig">IG</span>
+        <span class="badge badge-fb">FB</span>
+      </div>
+    </div>
+    <div class="body">
+      <div class="post-number">Post #1 — Sonnengfui Tegernsee Emaille-Tasse Petrol <span class="price-chip">19,90 €</span> <span style="font-size:0.7rem;color:#7c3aed;font-weight:700">CEO-GESETZT</span></div>
+      <div class="caption">
+        Wer den Tegernsee gfuiat — der hoit sei Tass' gern in der Hand. ❤️<br><br>
+        Die Sonnengfui-Emaille-Tasse: das Herzl für alle, denen der Tegernsee ans Herz gewachsen is. Genau das Richtige zum Frühstück — oder als Geschenk für jemanden, dem der See fehlt.<br><br>
+        👉 Link in Bio · seegfui.de/tassen<br><br>
+        <em style="color:#999">#tegernsee #liabzumsee #emailletasse #sonnengfui #fünfseenland #seegfui #heimatliebe #geschenkidee</em>
+      </div>
+      <div class="image-desc">Lifestyle-Bild: Sonnengfui Tegernsee Petrol Tasse, Griff rechts — CDN see8987 kw38-p1 ✅</div>
+      <div class="utm-line">UTM: utm_source=instagram&amp;utm_medium=organic&amp;utm_campaign=kw38&amp;utm_content=sonnengfui-tegernsee-tasse-p1</div>
+      <div class="check-row">
+        <span class="check">CDN HTTP 200</span>
+        <span class="check">social_image_gate exit 0</span>
+        <span class="check">overlay_gate exit 0</span>
+        <span class="check">Kein KI-Label (kein KI-Bild)</span>
+        <span class="check">Live-Preis 19,90 €</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- P2: Mi 16.09. — Sonnengfui 3-Seen-Carousel (Format-Test) -->
+  <div class="post-card" style="border: 2px solid #7c3aed;">
+    <div style="position:relative;">
+      <div class="carousel-slides">
+        <img src="https://cdn.jsdelivr.net/gh/djmana78/seegfui-print-assets/social/see8987/kw38-p2s1-ammersee-petrol_overlay.png"
+             alt="Sonnengfui Ammersee Petrol" loading="lazy"
+             onerror="this.style.display='none'">
+        <img src="https://cdn.jsdelivr.net/gh/djmana78/seegfui-print-assets/social/see8987/kw38-p2s2-starnberger-petrol_overlay.png"
+             alt="Sonnengfui Starnberger See Petrol" loading="lazy"
+             onerror="this.style.display='none'">
+        <img src="https://cdn.jsdelivr.net/gh/djmana78/seegfui-print-assets/social/see8987/kw38-p1-tegernsee-petrol_overlay.png"
+             alt="Sonnengfui Tegernsee Petrol" loading="lazy"
+             onerror="this.style.display='none'">
+        <span class="date-chip" style="position:absolute;top:12px;left:12px">Mi 16. Sep · 18:30 CEST</span>
+        <span class="carousel-label">🎠 CAROUSEL</span>
+        <div style="position:absolute;bottom:12px;right:12px;display:flex;gap:5px">
+          <span class="badge badge-ig">IG</span>
+          <span class="badge badge-fb">FB</span>
+        </div>
+      </div>
+    </div>
+    <div class="body">
+      <div class="post-number">Post #2 — Sonnengfui 3-Seen-Kollektion (FORMAT-TEST CAROUSEL) <span class="price-chip">19,90 €</span></div>
+      <div class="caption">
+        Drei Seen. Eine Liebe. ❤️<br><br>
+        Ob Ammersee, Starnberger See oder Tegernsee — die Sonnengfui-Emaille-Tasse gibt's für jeden See. Schiebt einfach weiter…<br><br>
+        Slide 1: Ammersee · Slide 2: Starnberger See · Slide 3: Tegernsee<br><br>
+        👉 Link in Bio · seegfui.de/tassen<br><br>
+        <em style="color:#999">#fünfseenland #seegfui #ammersee #starnbergersee #tegernsee #emailletasse #sonnengfui #geschenkidee #liabzumsee</em>
+      </div>
+      <div class="image-desc">
+        Carousel 3 Slides: Ammersee Petrol / Starnberger See Petrol / Tegernsee Petrol — alle mit Seegfui-Overlay.<br>
+        <strong style="color:#7c3aed">Infra-Bedingung:</strong> CTO muss Carousel-Upload (Meta Graph API) bis Mi 16.09. 12:00 bereitstellen. Fallback: Einzelbild Slide 1 (Ammersee), Carousel→KW39.
+      </div>
+      <div class="utm-line">UTM: utm_source=instagram&amp;utm_medium=organic&amp;utm_campaign=kw38&amp;utm_content=sonnengfui-3seen-carousel-p2</div>
+      <div class="check-row">
+        <span class="check">Alle 3 Slides: CDN HTTP 200</span>
+        <span class="check">social_image_gate exit 0</span>
+        <span class="check">overlay_gate exit 0</span>
+        <span class="check">Kein KI-Label (kein KI-Bild)</span>
+        <span class="check">Live-Preis 19,90 €</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- P3: Fr 18.09. — Sonn und See Ammersee T-Shirt (geblockt - Bild fehlt) -->
+  <div class="post-card blocked">
+    <div class="image-wrap">
+      <div class="blocked-overlay">
+        <div class="blocked-banner">⚠ BILD FEHLT</div>
+      </div>
+      <span class="date-chip">Fr 18. Sep · 18:30 CEST</span>
+    </div>
+    <div class="body">
+      <div class="post-number">Post #3 — „Sonn und See" Ammersee Unisex T-Shirt <span class="price-chip">34,90 €</span></div>
+      <div class="caption">
+        So schee is' am Ammersee — wenn Sonn und See zusammenkommen, braucht's nix mehr. 🌊☀️<br><br>
+        Unser „Sonn und See"-Shirt für alle Ammersee-Fans: weich, angenehm zu tragen, perfekt für den nächsten Seebesuch oder als Erinnerung für dahoam.<br><br>
+        👉 Link in Bio · seegfui.de/shirts<br><br>
+        <em style="color:#999">#ammersee #sonnundsee #seeshirt #liabzumsee #fünfseenland #seegfui #bayernsee #tshirtdesign #kierstellt</em>
+      </div>
+      <div class="image-desc" style="color:var(--rot)">
+        ⚠ Lifestyle-Bild fehlt! KreativAgent-Issue wird angelegt (Deadline Do 17.09. 18:00). Falls Bild nicht rechtzeitig fertig → Post entfällt oder auf KW39 verschoben.
+      </div>
+      <div class="utm-line">UTM: utm_source=instagram&amp;utm_medium=organic&amp;utm_campaign=kw38&amp;utm_content=sonn-und-see-ammersee-shirt-p3</div>
+      <div class="check-row">
+        <span class="check-blocked">Lifestyle-Bild ausstehend (KreativAgent)</span>
+        <span class="check">KI-Label geplant: „KI-erstellt"</span>
+        <span class="check">Live-Preis 34,90 €</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- P4: Sa 19.09. — Seehnsucht Starnberger See Hoodie (geblockt - Bild fehlt) -->
+  <div class="post-card blocked">
+    <div class="image-wrap">
+      <div class="blocked-overlay">
+        <div class="blocked-banner">⚠ BILD FEHLT</div>
+      </div>
+      <span class="date-chip">Sa 19. Sep · 11:00 CEST</span>
+    </div>
+    <div class="body">
+      <div class="post-number">Post #4 — Seehnsucht Starnberger See Unisex Hoodie <span class="price-chip">63,90 €</span></div>
+      <div class="caption">
+        Wenn die Sehnsucht nach dem Starnberger See wieder zuschlägt… ❤️🌊<br><br>
+        Der Seehnsucht-Hoodie: warm, weich, und er trägt dieses unverkennbare Gefühl von Seenähe — egal wo du gerade bist. Perfekt für den Herbst am See oder als Geschenk für echte Seefans.<br><br>
+        👉 Link in Bio · seegfui.de/hoodies<br><br>
+        <em style="color:#999">#starnbergersee #seehnsucht #hoodie #liabzumsee #fünfseenland #seegfui #herbstamstarnbergersee #kierstellt</em>
+      </div>
+      <div class="image-desc" style="color:var(--rot)">
+        ⚠ Lifestyle-Bild fehlt! KreativAgent-Issue wird angelegt (Deadline Do 17.09. 18:00). Falls Bild nicht rechtzeitig fertig → Post entfällt oder auf KW39 verschoben.
+      </div>
+      <div class="utm-line">UTM: utm_source=instagram&amp;utm_medium=organic&amp;utm_campaign=kw38&amp;utm_content=seehnsucht-starnberger-see-hoodie-p4</div>
+      <div class="check-row">
+        <span class="check-blocked">Lifestyle-Bild ausstehend (KreativAgent)</span>
+        <span class="check">KI-Label geplant: „KI-erstellt"</span>
+        <span class="check">Live-Preis 63,90 €</span>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ADS BLOCK -->
+<div class="section-title">Bezahlte Ads — Meta Ads</div>
+
+<div class="ads-box">
+  <div class="ads-header">
+    <span style="font-size:1.5rem">📊</span>
+    <div>
+      <h2>Seegfui-Sales-Regional — Phase 2</h2>
+      <p style="font-size:0.82rem;opacity:0.85">Stand 12.09.2026 · Kein neues Budget · Kill-Entscheid Check #2 am 15.09. (SEE-7863)</p>
+    </div>
+  </div>
+  <div class="ads-body">
+    <div class="ads-grid">
+      <div class="kpi-card">
+        <span class="value">28,33 €</span>
+        <div class="label">Verbraucht<br>(von 100 € Budget)</div>
+      </div>
+      <div class="kpi-card">
+        <span class="value">71,67 €</span>
+        <div class="label">Restbudget</div>
+      </div>
+      <div class="kpi-card">
+        <span class="value">3.132</span>
+        <div class="label">Impressionen</div>
+      </div>
+      <div class="kpi-card warn">
+        <span class="value">0</span>
+        <div class="label">Käufe</div>
+      </div>
+      <div class="kpi-card warn">
+        <span class="value">0,00</span>
+        <div class="label">ROAS</div>
+      </div>
+    </div>
+
+    <p style="font-size:0.85rem;color:#555;margin-bottom:14px">
+      <strong>⚠ Freigabe-Entscheidung erbeten:</strong> ROAS = 0,00 bei 28,33 € Spend und 3.132 Impressionen.
+      Laut Kill-Regel (SEE-7863 Check #2 am 15.09.): wenn am 15.09. weiterhin keine Käufe → Campaign pausieren.
+      Kein neues Budget, keine Erhöhung. Peter entscheidet am 15.09.
+    </p>
+
+    <div class="rule-row">
+      <div class="rule-box kill">
+        <div class="rule-label">🔴 Kill-Regel</div>
+        Check #2 am <strong>15.09.2026</strong> (SEE-7863): wenn 0 Käufe → Kampagne pausieren. Spend-Stand dann ca. ~30–35 €.
+      </div>
+      <div class="rule-box scale">
+        <div class="rule-label">🟢 Scale-Regel</div>
+        Erst ab ROAS &gt; 2,0 bei ≥ 3 Käufen skalieren — frühestens nach Check #2 mit CEO-Freigabe.
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- APPROVAL BOX -->
+<div class="approval-box">
+  <div class="icon">🔏</div>
+  <div>
+    <h2>Board-Freigabe erbeten — KW38 Wochenplan</h2>
+    <p>
+      Bitte diesen Wochenplan für KW38 (14.09.–19.09.2026) freigeben. Nach Acceptance:
+      Post-Slots werden als einzelne Issues angelegt (Robustheit), Posting-Routine je Slot eingerichtet,
+      KreativAgent für P3 (Ammersee T-Shirt) und P4 (Starnberger See Hoodie) angetriggert.
+    </p>
+    <div class="details">
+      <strong>Offene Punkte:</strong><br>
+      · P3 + P4: Lifestyle-Bild noch nicht fertig → KreativAgent-Issue mit Deadline Do 17.09. 18:00<br>
+      · P2 Carousel: CTO-Ticket für Meta Graph API Carousel-Upload nötig (Fallback: Einzelbild)<br>
+      · Ads Kill-Entscheid: Check #2 am 15.09. bei SEE-7863 — bei ROAS 0 → Kampagne pausieren
+    </div>
+  </div>
+</div>
+
+<footer>
+  Seegfui Wochenplan KW38 · SEE-8987 · erstellt 2026-09-12 · CMO Agent
+</footer>
+
+</body>
+</html>
