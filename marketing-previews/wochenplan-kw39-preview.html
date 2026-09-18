@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Seegfui Wochenplan KW39 – 21. Sep – 26. Sep 2026</title>
+<style>
+  :root {
+    --see-blau: #1a6e8a;
+    --see-blau-hell: #e8f4f8;
+    --gruen: #2d7a47;
+    --gruen-hell: #e8f5ee;
+    --orange: #c75e1a;
+    --rot: #b91c1c;
+    --rot-hell: #fde8e8;
+    --grau: #444;
+    --border: #ddd;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    background: #f0f2f5;
+    color: #222;
+    padding: 24px 16px;
+  }
+  header {
+    max-width: 1060px;
+    margin: 0 auto 32px;
+    background: var(--see-blau);
+    color: white;
+    padding: 28px 32px;
+    border-radius: 12px;
+  }
+  header h1 { font-size: 1.6rem; margin-bottom: 6px; }
+  header p { opacity: 0.85; font-size: 0.95rem; }
+  .badge {
+    display: inline-block;
+    padding: 3px 10px;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    margin-right: 6px;
+  }
+  .badge-organisch { background: #d4edda; color: #155724; }
+  .badge-ig { background: #e1306c; color: white; }
+  .badge-fb { background: #1877f2; color: white; }
+  .badge-ki { background: #fff3cd; color: #856404; }
+  .section-title {
+    max-width: 1060px;
+    margin: 0 auto 16px;
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--grau);
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    padding-left: 4px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .posts-grid {
+    max-width: 1060px;
+    margin: 0 auto 40px;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 18px;
+  }
+  .post-card {
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    display: flex;
+    flex-direction: column;
+  }
+  .post-card .image-wrap {
+    position: relative;
+    height: 260px;
+    background: #f5f5f5;
+    overflow: hidden;
+  }
+  .post-card .image-wrap img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .post-card .image-wrap .date-chip {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    background: rgba(0,0,0,0.65);
+    color: white;
+    border-radius: 6px;
+    padding: 4px 10px;
+    font-size: 0.78rem;
+    font-weight: 600;
+  }
+  .post-card .image-wrap .channel-chips {
+    position: absolute;
+    bottom: 12px;
+    right: 12px;
+    display: flex;
+    gap: 5px;
+  }
+  .post-card .body {
+    padding: 14px 16px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .post-card .product-name {
+    font-weight: 700;
+    font-size: 0.92rem;
+    color: var(--see-blau);
+    line-height: 1.3;
+  }
+  .post-card .price-line {
+    font-size: 0.85rem;
+    color: #555;
+  }
+  .post-card .price-line a {
+    color: var(--see-blau);
+    text-decoration: none;
+  }
+  .post-card .caption-box {
+    background: #f7f9fc;
+    border-left: 3px solid var(--see-blau);
+    padding: 10px 12px;
+    font-size: 0.82rem;
+    line-height: 1.5;
+    color: #333;
+    white-space: pre-wrap;
+    word-break: break-word;
+  }
+  .post-card .meta-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    align-items: center;
+  }
+  .post-card .check-list {
+    font-size: 0.78rem;
+    color: #555;
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+  }
+  .post-card .check-list .ok { color: var(--gruen); }
+  .post-card .check-list .warn { color: var(--orange); }
+  .ads-box {
+    max-width: 1060px;
+    margin: 0 auto 40px;
+    background: white;
+    border-radius: 12px;
+    padding: 24px 28px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  }
+  .ads-box h3 { font-size: 1rem; margin-bottom: 14px; color: var(--grau); }
+  .ads-box table { width: 100%; border-collapse: collapse; font-size: 0.86rem; }
+  .ads-box th { text-align: left; padding: 8px 10px; background: #f0f2f5; color: #555; font-weight: 600; }
+  .ads-box td { padding: 8px 10px; border-top: 1px solid var(--border); }
+  .preise-box {
+    max-width: 1060px;
+    margin: 0 auto 40px;
+    background: white;
+    border-radius: 12px;
+    padding: 20px 24px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    font-size: 0.86rem;
+    color: #555;
+  }
+  .preise-box h3 { font-size: 0.9rem; font-weight: 700; margin-bottom: 10px; color: var(--grau); }
+  .preise-box code { background: #f0f2f5; padding: 2px 6px; border-radius: 4px; font-size: 0.82rem; }
+  .footer {
+    max-width: 1060px;
+    margin: 20px auto 0;
+    font-size: 0.78rem;
+    color: #888;
+    text-align: center;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>Wochenplan KW39 — 21. Sep – 26. Sep 2026</h1>
+  <p>CMO · Organisch (kein Paid-Restart) · 4 Posts · Tassen-Fokus · Herbst-Einstieg</p>
+  <p style="margin-top:10px; font-size:0.82rem; opacity:0.7">Erstellt: Fr 19.09.2026 · SEE-9801 · Freigabe ausstehend</p>
+</header>
+
+<!-- ORGANISCHE POSTS -->
+<div class="section-title">📅 Organische Posts (4)</div>
+<div class="posts-grid">
+
+  <!-- P1: Mo 21.09. 18:30 -->
+  <div class="post-card">
+    <div class="image-wrap">
+      <img src="https://cdn.jsdelivr.net/gh/djmana78/seegfui-print-assets@f2d4cd96ea13e6937337f614945382a64526e4d0/social/see5854/see5854-love-ammersee-see-gruen-lifestyle-handle-on-right.png" alt="I ❤ Ammersee Tasse See-Grün am Ammersee-Steg" loading="lazy">
+      <div class="date-chip">Mo 21.09. · 18:30</div>
+      <div class="channel-chips">
+        <span class="badge badge-ig">IG</span>
+        <span class="badge badge-fb">FB</span>
+      </div>
+    </div>
+    <div class="body">
+      <div class="product-name">I ❤ Ammersee – Tasse (See-Grün)</div>
+      <div class="price-line">
+        13,90 € · <a href="https://seegfui.de/produkt/i-%e2%9d%a4-ammersee-tasse/" target="_blank">seegfui.de/produkt/i-❤-ammersee-tasse/</a>
+        <br><small style="color:#888">WC 563448 · geprüft 19.09.2026</small>
+      </div>
+      <div class="meta-row">
+        <span class="badge badge-organisch">Organisch</span>
+        <span class="badge badge-ki">🤖 KI-erstellt</span>
+      </div>
+      <div class="caption-box">Für alle, die den Ammersee im Herzen tragen. 💚
+
+Die „I ❤ Ammersee" Tasse – dein Morgen am See.
+
+I ❤ Ammersee Tasse | 13,90 € → seegfui.de/produkt/i-%e2%9d%a4-ammersee-tasse/?utm_source=instagram&utm_medium=post&utm_campaign=love-tasse-ammersee
+
+#ammersee #fünfseenland #seegfui #seeliebe #tasse #geschenkidee #heimat #liabzumsee 🤖 KI-erstellt (EU-AI-Act Art. 50) · #kierstellt</div>
+      <div class="check-list">
+        <div class="ok">✅ Bild CDN HTTP 200 (SHA f2d4cd96, see5854)</div>
+        <div class="ok">✅ bria bg-replace → KI-Label required</div>
+        <div class="ok">✅ Preis live-geprüft: 1390 Cent = 13,90 € (WC Store REST, 19.09.2026)</div>
+        <div class="ok">✅ Overlay: Seegfui-Wortmarke + rotes Herz (see5854-Komposit)</div>
+        <div class="ok">✅ Kein Bio-/Öko-Claim</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- P2: Mi 23.09. 18:30 -->
+  <div class="post-card">
+    <div class="image-wrap">
+      <img src="https://cdn.jsdelivr.net/gh/djmana78/seegfui-print-assets@b986660e4f1939e640dbee2446eb09123eaec32b/social/see9023/emaille-spruchtasse-tegernsee-am-see-dahoam-petrol-lifestyle_overlay.jpg" alt="Emaille-Spruchtasse Tegernsee Am See dahoam Petrol" loading="lazy">
+      <div class="date-chip">Mi 23.09. · 18:30</div>
+      <div class="channel-chips">
+        <span class="badge badge-ig">IG</span>
+        <span class="badge badge-fb">FB</span>
+      </div>
+    </div>
+    <div class="body">
+      <div class="product-name">Emaille-Spruchtasse Tegernsee – „Am See dahoam" (Petrol)</div>
+      <div class="price-line">
+        20,90 € · <a href="https://seegfui.de/produkt/emaille-spruchtasse-tegernsee-am-see-dahoam/" target="_blank">seegfui.de/produkt/emaille-spruchtasse-tegernsee-am-see-dahoam/</a>
+        <br><small style="color:#888">WC 577679 · geprüft 19.09.2026</small>
+      </div>
+      <div class="meta-row">
+        <span class="badge badge-organisch">Organisch</span>
+        <span class="badge badge-ki">🤖 KI-erstellt</span>
+      </div>
+      <div class="caption-box">Am See dahoam. Weil's nirgends schöner ist.
+
+Unsere Emaille-Spruchtasse bringt das Tegernsee-Gfühl in jeden Morgen.
+
+Emaille-Tasse Tegernsee „Am See dahoam" | 20,90 € → seegfui.de/produkt/emaille-spruchtasse-tegernsee-am-see-dahoam/?utm_source=instagram&utm_medium=post&utm_campaign=emaille-tasse-tegernsee
+
+#tegernsee #fünfseenland #seegfui #seegfühl #amseeguad #heimat #emailletasse #bayernsee 🤖 KI-erstellt (EU-AI-Act Art. 50) · #kierstellt</div>
+      <div class="check-list">
+        <div class="ok">✅ Bild CDN HTTP 200 (SHA b986660e, see9023)</div>
+        <div class="ok">✅ fal.ai + Overlay → KI-Label required</div>
+        <div class="ok">✅ Preis live-geprüft: 2090 Cent = 20,90 € (WC Store REST, 19.09.2026)</div>
+        <div class="ok">✅ Overlay: Seegfui-Wortmarke + rotes Herz (see9023-Komposit)</div>
+        <div class="ok">✅ Kein Bio-/Öko-Claim</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- P3: Fr 25.09. 18:30 -->
+  <div class="post-card">
+    <div class="image-wrap">
+      <img src="https://cdn.jsdelivr.net/gh/djmana78/seegfui-print-assets@7fa331e693277fc8e5dad0bc77344aad0a9d5a19/social/see6022/see6022-love-starnberger-see-schiefer-lifestyle-handle-on-right.png" alt="I ❤ Starnberger See Tasse Schiefer am Starnberger See" loading="lazy">
+      <div class="date-chip">Fr 25.09. · 18:30</div>
+      <div class="channel-chips">
+        <span class="badge badge-ig">IG</span>
+        <span class="badge badge-fb">FB</span>
+      </div>
+    </div>
+    <div class="body">
+      <div class="product-name">I ❤ Starnberger See – Tasse (Schiefer)</div>
+      <div class="price-line">
+        13,90 € · <a href="https://seegfui.de/produkt/i-%e2%9d%a4-starnberger-see-tasse/" target="_blank">seegfui.de/produkt/i-❤-starnberger-see-tasse/</a>
+        <br><small style="color:#888">WC 563475 · geprüft 19.09.2026</small>
+      </div>
+      <div class="meta-row">
+        <span class="badge badge-organisch">Organisch</span>
+        <span class="badge badge-ki">🤖 KI-erstellt</span>
+      </div>
+      <div class="caption-box">Starnberger See. Der Herbst kommt – und wird wunderschön. 🍂
+
+Die „I ❤ Starnberger See" Tasse – für alle mit See im Herzen.
+
+I ❤ Starnberger See Tasse | 13,90 € → seegfui.de/produkt/i-%e2%9d%a4-starnberger-see-tasse/?utm_source=instagram&utm_medium=post&utm_campaign=love-tasse-starnberger-see
+
+#starnbergersee #fünfseenland #seegfui #seeliebe #tasse #herbst #geschenkidee #bayernsee 🤖 KI-erstellt (EU-AI-Act Art. 50) · #kierstellt</div>
+      <div class="check-list">
+        <div class="ok">✅ Bild CDN HTTP 200 (SHA 7fa331e6, see6022)</div>
+        <div class="ok">✅ bria bg-replace → KI-Label required</div>
+        <div class="ok">✅ Preis live-geprüft: 1390 Cent = 13,90 € (WC Store REST, 19.09.2026)</div>
+        <div class="ok">✅ Overlay: Seegfui-Wortmarke + rotes Herz (see6022-Komposit)</div>
+        <div class="ok">✅ Kein Bio-/Öko-Claim</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- P4: Sa 26.09. 11:00 -->
+  <div class="post-card">
+    <div class="image-wrap">
+      <img src="https://cdn.jsdelivr.net/gh/djmana78/seegfui-print-assets@7fa331e693277fc8e5dad0bc77344aad0a9d5a19/social/see6022/see6022-love-tegernsee-see-blau-lifestyle-handle-on-right.png" alt="I ❤ Tegernsee Tasse See-Blau am Tegernsee" loading="lazy">
+      <div class="date-chip">Sa 26.09. · 11:00</div>
+      <div class="channel-chips">
+        <span class="badge badge-ig">IG</span>
+        <span class="badge badge-fb">FB</span>
+      </div>
+    </div>
+    <div class="body">
+      <div class="product-name">I ❤ Tegernsee – Tasse (See-Blau)</div>
+      <div class="price-line">
+        13,90 € · <a href="https://seegfui.de/produkt/i-%e2%9d%a4-tegernsee-tasse/" target="_blank">seegfui.de/produkt/i-❤-tegernsee-tasse/</a>
+        <br><small style="color:#888">WC 563496 · geprüft 19.09.2026</small>
+      </div>
+      <div class="meta-row">
+        <span class="badge badge-organisch">Organisch</span>
+        <span class="badge badge-ki">🤖 KI-erstellt</span>
+      </div>
+      <div class="caption-box">Liab zum See. 💙
+
+Die „I ❤ Tegernsee" Tasse – das perfekte Mitbringsel für jeden Tegernsee-Fan.
+
+I ❤ Tegernsee Tasse | 13,90 € → seegfui.de/produkt/i-%e2%9d%a4-tegernsee-tasse/?utm_source=instagram&utm_medium=post&utm_campaign=love-tasse-tegernsee
+
+#tegernsee #fünfseenland #seegfui #seeliebe #liabzumsee #geschenkidee #tasse #bayernsee 🤖 KI-erstellt (EU-AI-Act Art. 50) · #kierstellt</div>
+      <div class="check-list">
+        <div class="ok">✅ Bild CDN HTTP 200 (SHA 7fa331e6, see6022)</div>
+        <div class="ok">✅ bria bg-replace → KI-Label required</div>
+        <div class="ok">✅ Preis live-geprüft: 1390 Cent = 13,90 € (WC Store REST, 19.09.2026)</div>
+        <div class="ok">✅ Overlay: Seegfui-Wortmarke + rotes Herz (see6022-Komposit)</div>
+        <div class="ok">✅ Kein Bio-/Öko-Claim</div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ADS BLOCK -->
+<div class="section-title">💰 Paid Ads (KW39)</div>
+<div class="ads-box">
+  <h3>Meta Ads — Status KW39</h3>
+  <table>
+    <thead>
+      <tr>
+        <th>Kampagne</th>
+        <th>Status</th>
+        <th>Budget</th>
+        <th>Begründung</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Seegfui-Sales-Regional Phase 2</td>
+        <td><strong style="color: var(--orange)">PAUSED (kein Restart)</strong></td>
+        <td>55,04 € geparkt</td>
+        <td>CEO-Entscheid 18.09.: 0 Käufe aus 5.133 Impressionen → erst Vertrauen aufbauen. Kein Paid-Restart ohne Conversion-Voraussetzungen. <em>Spend-Gate: kein Restart ohne neue CEO-Freigabe.</em></td>
+      </tr>
+    </tbody>
+  </table>
+  <p style="margin-top: 14px; font-size: 0.83rem; color: #777;">
+    Paid-Restart-Kriterien (laut CEO-Vorgabe): Conversion-Optimierung + Trust-Signale fertig · UGC/Bewertungen vorhanden · Retargeting-Audience aufgebaut · Creative mit Preis-Anker.
+  </p>
+</div>
+
+<!-- PREIS-BELEGE -->
+<div class="section-title">🧾 Live-Preis-Belege (WC Store REST, 19.09.2026)</div>
+<div class="preise-box">
+  <h3>Alle Preise live verifiziert (Quelle: WooCommerce Store REST API)</h3>
+  <table style="width:100%; border-collapse:collapse; font-size:0.84rem">
+    <thead>
+      <tr style="background:#f0f2f5">
+        <th style="padding:6px 10px; text-align:left">Produkt</th>
+        <th style="padding:6px 10px; text-align:left">WC ID</th>
+        <th style="padding:6px 10px; text-align:left">Preis (Cent)</th>
+        <th style="padding:6px 10px; text-align:left">Preis (EUR)</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr style="border-top:1px solid #ddd">
+        <td style="padding:6px 10px">I ❤ Ammersee – Tasse</td>
+        <td style="padding:6px 10px"><code>563448</code></td>
+        <td style="padding:6px 10px">1390</td>
+        <td style="padding:6px 10px"><strong>13,90 €</strong></td>
+      </tr>
+      <tr style="border-top:1px solid #ddd">
+        <td style="padding:6px 10px">Emaille-Spruchtasse Tegernsee – Am See dahoam</td>
+        <td style="padding:6px 10px"><code>577679</code></td>
+        <td style="padding:6px 10px">2090</td>
+        <td style="padding:6px 10px"><strong>20,90 €</strong></td>
+      </tr>
+      <tr style="border-top:1px solid #ddd">
+        <td style="padding:6px 10px">I ❤ Starnberger See – Tasse</td>
+        <td style="padding:6px 10px"><code>563475</code></td>
+        <td style="padding:6px 10px">1390</td>
+        <td style="padding:6px 10px"><strong>13,90 €</strong></td>
+      </tr>
+      <tr style="border-top:1px solid #ddd">
+        <td style="padding:6px 10px">I ❤ Tegernsee – Tasse</td>
+        <td style="padding:6px 10px"><code>563496</code></td>
+        <td style="padding:6px 10px">1390</td>
+        <td style="padding:6px 10px"><strong>13,90 €</strong></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="footer">
+  Seegfui KW39 Wochenplan · CMO · SEE-9801 · Erstellt 19.09.2026 · Freigabe durch CEO (Peter) erforderlich
+</div>
+
+</body>
+</html>
