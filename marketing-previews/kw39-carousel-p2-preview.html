@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Seegfui Post-Preview — KW39 Carousel Mi 23.09.2026</title>
+<style>
+  :root {
+    --see-blau: #1a6e8a;
+    --see-blau-hell: #e8f4f8;
+    --gruen: #2d7a47;
+    --gruen-hell: #e8f5ee;
+    --orange: #c75e1a;
+    --rot: #b91c1c;
+    --rot-hell: #fde8e8;
+    --grau: #444;
+    --border: #ddd;
+    --purple: #7c3aed;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    background: #f0f2f5;
+    color: #222;
+    padding: 24px 16px;
+  }
+  .container { max-width: 760px; margin: 0 auto; }
+  header {
+    background: var(--see-blau);
+    color: white;
+    padding: 28px 32px;
+    border-radius: 12px;
+    margin-bottom: 24px;
+  }
+  header h1 { font-size: 1.5rem; margin-bottom: 6px; }
+  header p { opacity: 0.85; font-size: 0.92rem; }
+  .badge {
+    display: inline-block;
+    padding: 3px 10px;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    margin-right: 6px;
+  }
+  .badge-carousel { background: var(--purple); color: white; }
+  .badge-ig { background: #e1306c; color: white; }
+  .badge-fb { background: #1877f2; color: white; }
+  .badge-ki { background: #fff3cd; color: #856404; }
+  .badge-nachholung { background: #fde8e8; color: var(--rot); }
+
+  /* Carousel Preview */
+  .carousel-card {
+    background: white;
+    border-radius: 16px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.1);
+    overflow: hidden;
+    margin-bottom: 20px;
+    border: 3px solid var(--purple);
+  }
+  .carousel-header {
+    background: var(--purple);
+    color: white;
+    padding: 14px 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: 700;
+    font-size: 0.92rem;
+  }
+  .slides-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 0;
+  }
+  .slide {
+    position: relative;
+    aspect-ratio: 1;
+    overflow: hidden;
+    background: #f0f0f0;
+  }
+  .slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  .slide-label {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(0,0,0,0.6);
+    color: white;
+    padding: 6px 10px;
+    font-size: 0.72rem;
+    font-weight: 600;
+    text-align: center;
+  }
+  .slide-num {
+    position: absolute;
+    top: 8px;
+    left: 8px;
+    background: rgba(0,0,0,0.65);
+    color: white;
+    border-radius: 50%;
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.78rem;
+    font-weight: 700;
+  }
+  .ai-badge {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    background: #f59e0b;
+    color: white;
+    border-radius: 4px;
+    padding: 2px 6px;
+    font-size: 0.64rem;
+    font-weight: 700;
+  }
+
+  /* Caption block */
+  .caption-block {
+    padding: 20px 24px;
+    border-top: 1px solid var(--border);
+  }
+  .caption-block h3 {
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--grau);
+    margin-bottom: 10px;
+  }
+  .caption-text {
+    font-size: 0.92rem;
+    line-height: 1.6;
+    color: #333;
+    background: #f8f9fa;
+    border-radius: 8px;
+    padding: 14px 16px;
+    white-space: pre-wrap;
+    word-break: break-word;
+  }
+  .caption-text .ki-label {
+    color: #92400e;
+    font-weight: 600;
+  }
+
+  /* Meta block */
+  .meta-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    padding: 0 24px 20px;
+  }
+  .meta-item {
+    background: var(--see-blau-hell);
+    border-radius: 8px;
+    padding: 10px 14px;
+  }
+  .meta-item .label {
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--see-blau);
+    font-weight: 700;
+    margin-bottom: 4px;
+  }
+  .meta-item .value {
+    font-size: 0.88rem;
+    color: #333;
+    font-weight: 600;
+  }
+
+  /* Checks */
+  .checks-box {
+    background: var(--gruen-hell);
+    border-radius: 12px;
+    padding: 18px 24px;
+    margin-bottom: 20px;
+  }
+  .checks-box h3 {
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--gruen);
+    font-weight: 700;
+    margin-bottom: 12px;
+  }
+  .checks-list { display: flex; flex-wrap: wrap; gap: 8px; }
+  .check-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    background: white;
+    border-radius: 6px;
+    padding: 5px 12px;
+    font-size: 0.8rem;
+    color: #333;
+  }
+  .check-item::before { content: '✅'; }
+  .check-item.warn::before { content: '⚠️'; }
+  .check-item.ki::before { content: '🤖'; }
+
+  /* UTM block */
+  .utm-block {
+    background: white;
+    border-radius: 12px;
+    padding: 16px 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+    font-size: 0.82rem;
+    color: #555;
+  }
+  .utm-block strong { color: var(--see-blau); }
+  .utm-block code {
+    background: #f1f3f5;
+    padding: 2px 6px;
+    border-radius: 3px;
+    font-size: 0.78rem;
+    word-break: break-all;
+  }
+
+  /* Approval box */
+  .approval-box {
+    background: #fffbeb;
+    border: 2px solid #f59e0b;
+    border-radius: 12px;
+    padding: 22px 26px;
+    margin-bottom: 20px;
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+  }
+  .approval-box .icon { font-size: 2rem; flex-shrink: 0; }
+  .approval-box h2 { font-size: 1rem; margin-bottom: 6px; color: #92400e; }
+  .approval-box p { font-size: 0.88rem; color: #78350f; line-height: 1.5; }
+  .approval-box ul { margin: 8px 0 0 16px; font-size: 0.85rem; color: #78350f; line-height: 1.7; }
+
+  footer { text-align: center; font-size: 0.74rem; color: #999; padding: 20px 0; }
+</style>
+</head>
+<body>
+<div class="container">
+
+<header>
+  <h1>Post-Preview KW39 — Sonnengfui 3-Seen-Carousel</h1>
+  <p>
+    Mi 23.09.2026 · 18:30 CEST &nbsp;|&nbsp;
+    <span class="badge badge-carousel">🎠 CAROUSEL</span>
+    <span class="badge badge-ig">IG</span>
+    <span class="badge badge-fb">FB</span>
+    <span class="badge badge-nachholung">Nachholung KW38-P2</span>
+  </p>
+  <p style="margin-top:8px;opacity:0.9;font-size:0.85rem">
+    Motiv + Caption board-freigegeben (SEE-8987 · Karte 009a114b). Neuer Slot braucht eigene Preview-Gate-Bestätigung (Post-Set: kw39).
+  </p>
+</header>
+
+<!-- Carousel Card -->
+<div class="carousel-card">
+  <div class="carousel-header">
+    <span style="font-size:1.2rem">🎠</span>
+    Carousel — 3 Slides (Ammersee · Starnberger See · Tegernsee)
+    &nbsp;·&nbsp; SHA-gepinnt @62b4444 · CDN HTTP 200 · Gates exit 0
+  </div>
+
+  <div class="slides-grid">
+    <div class="slide">
+      <img src="https://cdn.jsdelivr.net/gh/djmana78/seegfui-print-assets@62b4444db9ae16ccbda2d4107dc046f1cb83c913/social/see8987/kw38-p2s1-ammersee-petrol_overlay.png"
+           alt="Slide 1: Ammersee Petrol"
+           onerror="this.style.display='none';this.parentElement.style.background='#ddd'">
+      <span class="slide-num">1</span>
+      <div class="slide-label">Ammersee</div>
+    </div>
+    <div class="slide">
+      <img src="https://cdn.jsdelivr.net/gh/djmana78/seegfui-print-assets@62b4444db9ae16ccbda2d4107dc046f1cb83c913/social/see8987/kw38-p2s2-starnberger-petrol_overlay.png"
+           alt="Slide 2: Starnberger See Petrol"
+           onerror="this.style.display='none';this.parentElement.style.background='#ddd'">
+      <span class="slide-num">2</span>
+      <div class="slide-label">Starnberger See</div>
+    </div>
+    <div class="slide">
+      <img src="https://cdn.jsdelivr.net/gh/djmana78/seegfui-print-assets@62b4444db9ae16ccbda2d4107dc046f1cb83c913/social/see8987/kw38-p1-tegernsee-petrol_overlay.png"
+           alt="Slide 3: Tegernsee Petrol (bria KI)"
+           onerror="this.style.display='none';this.parentElement.style.background='#ddd'">
+      <span class="slide-num">3</span>
+      <span class="ai-badge">KI</span>
+      <div class="slide-label">Tegernsee · KI-erstellt</div>
+    </div>
+  </div>
+
+  <div class="meta-grid">
+    <div class="meta-item">
+      <div class="label">Datum / Uhrzeit</div>
+      <div class="value">Mi 23.09.2026 · 18:30 CEST</div>
+    </div>
+    <div class="meta-item">
+      <div class="label">Post-Set</div>
+      <div class="value">kw39</div>
+    </div>
+    <div class="meta-item">
+      <div class="label">Format</div>
+      <div class="value">Carousel · 3 Slides</div>
+    </div>
+    <div class="meta-item">
+      <div class="label">Kanäle</div>
+      <div class="value">Instagram + Facebook</div>
+    </div>
+  </div>
+
+  <div class="caption-block">
+    <h3>Caption (Instagram) &amp; Text (Facebook)</h3>
+    <div class="caption-text">Ammersee. Starnberger See. Tegernsee. Welcher ist deiner? Die Sonnengfui Emaille-Tasse – für jeden See in Petrol. 19,90 EUR. seegfui.de #ammersee #starnbergersee #tegernsee #fuenfseenland #seegfui <span class="ki-label">🤖 KI-erstellt (EU-AI-Act Art. 50)</span></div>
+    <p style="margin-top:10px;font-size:0.78rem;color:#777">
+      Facebook-Text: wie oben + UTM-Link (s.u.) statt „seegfui.de"
+    </p>
+  </div>
+</div>
+
+<!-- Checks -->
+<div class="checks-box">
+  <h3>Gate-Checks</h3>
+  <div class="checks-list">
+    <div class="check-item">Alle 3 Slides: CDN HTTP 200 (SHA @62b4444)</div>
+    <div class="check-item">social_image_gate: exit 0 (kw38-p2, SEE-8987)</div>
+    <div class="check-item">overlay_gate: exit 0 — rotes Herz gemessen (kw38-p2, SEE-8987)</div>
+    <div class="check-item ki">KI-Label: 🤖 KI-erstellt (EU-AI-Act Art. 50) — Slide 3 ist bria-Bild aus kw38-p1</div>
+    <div class="check-item">Preis: 19,90 EUR (Sonnengfui Emaille-Tasse, alle 3 Seen)</div>
+    <div class="check-item">Inhalt board-freigegeben: SEE-8987 · Karte 009a114b</div>
+    <div class="check-item">Post-Set: kw39 (neuer Slot, CEO-Entscheid SEE-9885)</div>
+    <div class="check-item">Kein Bio-/Öko-Claim in Caption</div>
+  </div>
+</div>
+
+<!-- UTM -->
+<div class="utm-block">
+  <strong>UTM-Parameter (kw39)</strong><br>
+  <code>utm_source=instagram&amp;utm_medium=organic&amp;utm_campaign=kw39&amp;utm_content=sonnengfui-3seen-carousel-p2</code><br>
+  <code>utm_source=facebook&amp;utm_medium=organic&amp;utm_campaign=kw39&amp;utm_content=sonnengfui-3seen-carousel-p2</code>
+</div>
+
+<!-- Approval -->
+<div class="approval-box">
+  <div class="icon">🔏</div>
+  <div>
+    <h2>Freigabe-Bitte — KW39 Slot (neuer Slot, nicht neuer Inhalt)</h2>
+    <p>
+      Der Inhalt ist unverändert aus kw38-p2 (Board-Freigabe SEE-8987 gilt weiter).
+      <strong>Der neue Slot Mi 23.09.2026 18:30 CEST braucht eine eigene Preview-Gate-Bestätigung</strong> (Post-Set: <code>kw39</code>).
+    </p>
+    <ul>
+      <li>Motiv: Sonnengfui Emaille-Tasse Petrol — Ammersee, Starnberger See, Tegernsee</li>
+      <li>Caption: unveränderter kw38-p2-Text + Pflicht-KI-Label (Slide 3 = bria)</li>
+      <li>Alle Gates grün (CDN HTTP 200, social_image_gate 0, overlay_gate 0)</li>
+      <li>Posting nach Accept: meta_post.py ig-carousel + fb-carousel, SHA @62b4444</li>
+    </ul>
+  </div>
+</div>
+
+<footer>
+  Seegfui Post-Preview · SEE-9891 · KW39-P2 Carousel · Nachholung KW38-P2 (CEO-Entscheid SEE-9885) · CMO Agent · 2026-09-19
+</footer>
+
+</div>
+</body>
+</html>
