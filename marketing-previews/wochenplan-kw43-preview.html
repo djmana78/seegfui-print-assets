@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Seegfui Wochenplan KW43 – 19. Okt – 24. Okt 2026</title>
+<style>
+  :root {
+    --see-blau: #1a6e8a;
+    --see-blau-hell: #e8f4f8;
+    --gruen: #2d7a47;
+    --gruen-hell: #e8f5ee;
+    --orange: #c75e1a;
+    --rot: #b91c1c;
+    --rot-hell: #fde8e8;
+    --grau: #444;
+    --border: #ddd;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    background: #f0f2f5;
+    color: #222;
+    padding: 24px 16px;
+  }
+  header {
+    max-width: 1060px;
+    margin: 0 auto 32px;
+    background: var(--see-blau);
+    color: white;
+    padding: 28px 32px;
+    border-radius: 12px;
+  }
+  header h1 { font-size: 1.6rem; margin-bottom: 6px; }
+  header p { opacity: 0.85; font-size: 0.95rem; }
+  .badge {
+    display: inline-block;
+    padding: 3px 10px;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    margin-right: 6px;
+  }
+  .badge-organisch { background: #d4edda; color: #155724; }
+  .badge-ig { background: #e1306c; color: white; }
+  .badge-fb { background: #1877f2; color: white; }
+  .badge-ki { background: #fff3cd; color: #856404; }
+  .badge-warn { background: #fde8e8; color: var(--rot); }
+  .badge-blocked { background: #fff3cd; color: #7d4e00; border: 1px solid #f5c842; }
+  .section-title {
+    max-width: 1060px;
+    margin: 0 auto 16px;
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--grau);
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    padding-left: 4px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .posts-grid {
+    max-width: 1060px;
+    margin: 0 auto 40px;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 18px;
+  }
+  .post-card {
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    display: flex;
+    flex-direction: column;
+  }
+  .post-card.blocked { border: 2px solid var(--orange); }
+  .post-card .image-wrap {
+    position: relative;
+    height: 260px;
+    background: #f5f5f5;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .post-card .image-wrap img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .post-card .image-wrap .placeholder {
+    text-align: center;
+    padding: 20px;
+    color: #888;
+  }
+  .post-card .image-wrap .placeholder .icon { font-size: 2.5rem; margin-bottom: 8px; }
+  .post-card .image-wrap .placeholder .label { font-size: 0.82rem; font-weight: 600; color: var(--orange); }
+  .post-card .image-wrap .placeholder .sub { font-size: 0.75rem; margin-top: 4px; color: #aaa; }
+  .post-card .image-wrap .date-chip {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    background: rgba(0,0,0,0.65);
+    color: white;
+    border-radius: 6px;
+    padding: 4px 10px;
+    font-size: 0.78rem;
+    font-weight: 600;
+  }
+  .post-card .image-wrap .channel-chips {
+    position: absolute;
+    bottom: 12px;
+    right: 12px;
+    display: flex;
+    gap: 5px;
+  }
+  .post-card .body {
+    padding: 14px 16px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .post-card .product-name {
+    font-weight: 700;
+    font-size: 0.92rem;
+    color: var(--see-blau);
+    line-height: 1.3;
+  }
+  .post-card .price-line {
+    font-size: 0.85rem;
+    color: #555;
+  }
+  .post-card .price-line a {
+    color: var(--see-blau);
+    text-decoration: none;
+  }
+  .post-card .caption-box {
+    background: #f7f9fc;
+    border-left: 3px solid var(--see-blau);
+    padding: 10px 12px;
+    font-size: 0.82rem;
+    line-height: 1.5;
+    color: #333;
+    white-space: pre-wrap;
+    word-break: break-word;
+  }
+  .post-card .meta-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+    align-items: center;
+  }
+  .post-card .dep-row {
+    font-size: 0.8rem;
+    color: var(--orange);
+    background: #fff8f0;
+    padding: 8px 10px;
+    border-radius: 6px;
+    border-left: 3px solid var(--orange);
+  }
+  .post-card .checklist {
+    font-size: 0.8rem;
+    color: #555;
+  }
+  .post-card .checklist li {
+    list-style: none;
+    padding: 2px 0;
+  }
+  .post-card .checklist li::before { content: "✅ "; }
+  .post-card .checklist li.fail::before { content: "❌ "; }
+  .post-card .checklist li.warn::before { content: "⚠️ "; }
+  .ads-block {
+    max-width: 1060px;
+    margin: 0 auto 40px;
+    background: white;
+    border-radius: 12px;
+    padding: 24px 28px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  }
+  .ads-block h2 { font-size: 1.1rem; color: var(--grau); margin-bottom: 16px; }
+  .ads-block table { width: 100%; border-collapse: collapse; font-size: 0.87rem; }
+  .ads-block th { text-align: left; padding: 8px 12px; background: #f5f7fa; color: #555; font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.04em; }
+  .ads-block td { padding: 8px 12px; border-top: 1px solid #eee; vertical-align: top; }
+  .price-verified { font-size: 0.75rem; color: #888; margin-top: 4px; }
+  .guardrail-box {
+    max-width: 1060px;
+    margin: 0 auto 32px;
+    background: #f0fdf4;
+    border: 1px solid #bbf7d0;
+    border-radius: 10px;
+    padding: 16px 20px;
+    font-size: 0.85rem;
+  }
+  .guardrail-box h3 { font-size: 0.9rem; color: #166534; margin-bottom: 10px; }
+  .guardrail-box ul { padding-left: 18px; }
+  .guardrail-box li { margin-bottom: 4px; color: #15803d; }
+  footer {
+    max-width: 1060px;
+    margin: 0 auto;
+    font-size: 0.78rem;
+    color: #aaa;
+    text-align: center;
+    padding: 16px 0;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>📅 Seegfui Wochenplan KW43</h1>
+  <p>19. Oktober – 24. Oktober 2026 &nbsp;·&nbsp; Organische Posts + Ads &nbsp;·&nbsp; Erstellt: 2026-10-17 &nbsp;·&nbsp; CMO ([SEE-11305](/SEE/issues/SEE-11305))</p>
+</header>
+
+<!-- GUARDRAIL SUMMARY -->
+<div class="guardrail-box">
+  <h3>✅ Guardrail-Check</h3>
+  <ul>
+    <li>Kein Bio-/Öko-Claim in Captions — geprüft ✓</li>
+    <li>Alle Posts tragen <code>🤖 KI-erstellt</code> (aiLabel: required, fal.ai Lifestyle-Bild) ✓</li>
+    <li>Spend-Gate: Kein neues Ad-Budget beantragt — Kein CEO-Spend erforderlich ✓</li>
+    <li>Lifestyle-Bild-Pflicht (§3.5): Alle 4 Posts → KreativAgent-Issues angelegt (Deadline 48 h vor Go-Live) ⚠️ OFFEN</li>
+    <li>Live-Preis-Prüfung (§3): Alle Preise via WC Store REST gezogen, 2026-10-17 ✓</li>
+  </ul>
+</div>
+
+<!-- ORGANISCHE POSTS -->
+<div class="section-title">🌊 Organische Posts (FB + IG)</div>
+
+<div class="posts-grid">
+
+  <!-- P1: Mo 19.10 -->
+  <div class="post-card blocked">
+    <div class="image-wrap">
+      <div class="placeholder">
+        <div class="icon">🎨</div>
+        <div class="label">BILD OFFEN</div>
+        <div class="sub">KreativAgent in Arbeit</div>
+      </div>
+      <div class="date-chip">Mo 19.10 · 18:30 CEST</div>
+      <div class="channel-chips">
+        <span class="badge badge-ig">IG</span>
+        <span class="badge badge-fb">FB</span>
+      </div>
+    </div>
+    <div class="body">
+      <div class="meta-row">
+        <span class="badge badge-organisch">Organisch</span>
+        <span class="badge badge-ki">🤖 KI-erstellt</span>
+        <span class="badge badge-blocked">⚠️ Bild offen</span>
+      </div>
+      <div class="product-name">P1 – Seehnsucht Starnberger See – Unisex Hoodie (Navy)</div>
+      <div class="price-line">
+        63,90 € · <a href="https://seegfui.de/produkt/seehnsucht-starnberger-see-unisex-hoodie/" target="_blank">seegfui.de/produkt/seehnsucht-starnberger-see-unisex-hoodie/</a>
+        <div class="price-verified">Live: slug seehnsucht-starnberger-see-unisex-hoodie → 6390 Ct = 63,90 € (geprüft: 2026-10-17 09:00)</div>
+      </div>
+      <div class="caption-box">Herbst am Starnberger See — da brauchst kein Urlaub. 🍂🌊
+
+Wer einmal am Starnberger See dahoam is, der weiß: a Seehnsucht, die bleibt für immer. Warm einpackn, raus an den See und die Seele baumeln lassen.
+
+Unser Seehnsucht-Hoodie in Navy — für alle, die den See im Herzen tragen.
+63,90 €
+
+🛒 seegfui.de?utm_source=instagram&amp;utm_medium=post&amp;utm_campaign=seehnsucht | Link in Bio
+
+#starnbergersee #seehnsucht #seegfui #homedatbayern #herbstamsee #fünfseenland #bavarianlakes #hoodie #bayernsee #seeliebe
+
+🤖 KI-erstellt</div>
+      <ul class="checklist">
+        <li>Caption: kein Bio-Claim ✓</li>
+        <li>aiLabel: required — <code>🤖 KI-erstellt</code> in Caption ✓</li>
+        <li class="warn">Lifestyle-Bild: offen → KreativAgent SEE-11306</li>
+      </ul>
+      <div class="dep-row">⚠️ Blockiert bis Lifestyle-Bild fertig — KreativAgent SEE-11306, Deadline 17.10. 22:00</div>
+    </div>
+  </div>
+
+  <!-- P2: Mi 21.10 -->
+  <div class="post-card blocked">
+    <div class="image-wrap">
+      <div class="placeholder">
+        <div class="icon">🎨</div>
+        <div class="label">BILD OFFEN</div>
+        <div class="sub">KreativAgent in Arbeit</div>
+      </div>
+      <div class="date-chip">Mi 21.10 · 18:30 CEST</div>
+      <div class="channel-chips">
+        <span class="badge badge-ig">IG</span>
+        <span class="badge badge-fb">FB</span>
+      </div>
+    </div>
+    <div class="body">
+      <div class="meta-row">
+        <span class="badge badge-organisch">Organisch</span>
+        <span class="badge badge-ki">🤖 KI-erstellt</span>
+        <span class="badge badge-blocked">⚠️ Bild offen</span>
+      </div>
+      <div class="product-name">P2 – Am See dahoam – Ammersee – Damen T-Shirt (Weiß)</div>
+      <div class="price-line">
+        34,90 € · <a href="https://seegfui.de/produkt/am-see-dahoam-ammersee-damen-tailliert-organic-t-shirt/" target="_blank">seegfui.de/produkt/am-see-dahoam-ammersee-…</a>
+        <div class="price-verified">Live: slug am-see-dahoam-ammersee-damen-tailliert-organic-t-shirt → 3490 Ct = 34,90 € (geprüft: 2026-10-17 09:00)</div>
+      </div>
+      <div class="caption-box">Am Ammersee dahoam — und das in jedem Wetter. ☀️🌧️
+
+Der See ruft, egal ob Sonnenschein oder Herbstnebel über'm Wasser. Einmal Seemensch, immer Seemensch.
+
+Für alle Ammersee-Madln: unser "Am See dahoam"-Shirt in Weiß — weil Heimat sich gut anfühlt.
+34,90 €
+
+🛒 seegfui.de?utm_source=instagram&amp;utm_medium=post&amp;utm_campaign=amseedahoam | Link in Bio
+
+#ammersee #amseedahoam #seegfui #seefrauen #bayerischeseemadln #fünfseenland #organiccotton #damenshirt #ammerseeliebe #heimatgefuehl
+
+🤖 KI-erstellt</div>
+      <ul class="checklist">
+        <li>Caption: kein Bio-Claim ✓</li>
+        <li>aiLabel: required — <code>🤖 KI-erstellt</code> in Caption ✓</li>
+        <li class="warn">Lifestyle-Bild: offen → KreativAgent SEE-11307</li>
+      </ul>
+      <div class="dep-row">⚠️ Blockiert bis Lifestyle-Bild fertig — KreativAgent SEE-11307, Deadline 19.10. 22:00</div>
+    </div>
+  </div>
+
+  <!-- P3: Fr 23.10 -->
+  <div class="post-card blocked">
+    <div class="image-wrap">
+      <div class="placeholder">
+        <div class="icon">🎨</div>
+        <div class="label">BILD OFFEN</div>
+        <div class="sub">KreativAgent in Arbeit</div>
+      </div>
+      <div class="date-chip">Fr 23.10 · 18:30 CEST</div>
+      <div class="channel-chips">
+        <span class="badge badge-ig">IG</span>
+        <span class="badge badge-fb">FB</span>
+      </div>
+    </div>
+    <div class="body">
+      <div class="meta-row">
+        <span class="badge badge-organisch">Organisch</span>
+        <span class="badge badge-ki">🤖 KI-erstellt</span>
+        <span class="badge badge-blocked">⚠️ Bild offen</span>
+      </div>
+      <div class="product-name">P3 – Seehnsucht Ammersee – Unisex Hoodie (Herbst)</div>
+      <div class="price-line">
+        63,90 € · <a href="https://seegfui.de/produkt/seehnsucht-ammersee-unisex-hoodie/" target="_blank">seegfui.de/produkt/seehnsucht-ammersee-unisex-hoodie/</a>
+        <div class="price-verified">Live: slug seehnsucht-ammersee-unisex-hoodie → 6390 Ct = 63,90 € (geprüft: 2026-10-17 09:00)</div>
+      </div>
+      <div class="caption-box">Freitag am Ammersee? Des klingt nach'm perfekten Herbst-Spaziergang. 🍁
+
+Warm einpackn, an den See, und der Seehnsucht einfach nachgeben. Das Seegfühl kennen nur die, die schon mal dort waren.
+
+Unser Seehnsucht Ammersee Hoodie — für die letzte goldene Stunde am See.
+Und: perfektes Weihnachtsgeschenk für echte Seenliebhaber! 🎁
+63,90 €
+
+🛒 seegfui.de?utm_source=instagram&amp;utm_medium=post&amp;utm_campaign=seehnsucht | Link in Bio
+
+#ammersee #seehnsucht #seegfui #herbstamsee #fünfseenland #bavarianlakes #hoodie #weihnachtsgeschenk #geschenkidee #seegefuehl
+
+🤖 KI-erstellt</div>
+      <ul class="checklist">
+        <li>Caption: kein Bio-Claim ✓</li>
+        <li>aiLabel: required — <code>🤖 KI-erstellt</code> in Caption ✓</li>
+        <li class="warn">Lifestyle-Bild: offen → KreativAgent SEE-11308</li>
+      </ul>
+      <div class="dep-row">⚠️ Blockiert bis Lifestyle-Bild fertig — KreativAgent SEE-11308, Deadline 21.10. 22:00</div>
+    </div>
+  </div>
+
+  <!-- P4: Sa 24.10 -->
+  <div class="post-card blocked">
+    <div class="image-wrap">
+      <div class="placeholder">
+        <div class="icon">🎨</div>
+        <div class="label">BILD OFFEN</div>
+        <div class="sub">KreativAgent in Arbeit</div>
+      </div>
+      <div class="date-chip">Sa 24.10 · 11:00 CEST</div>
+      <div class="channel-chips">
+        <span class="badge badge-ig">IG</span>
+        <span class="badge badge-fb">FB</span>
+      </div>
+    </div>
+    <div class="body">
+      <div class="meta-row">
+        <span class="badge badge-organisch">Organisch</span>
+        <span class="badge badge-ki">🤖 KI-erstellt</span>
+        <span class="badge badge-blocked">⚠️ Bild offen</span>
+      </div>
+      <div class="product-name">P4 – Snapback Cap Starnberger See</div>
+      <div class="price-line">
+        34,90 € · <a href="https://seegfui.de/produkt/snapback-cap-starnberger-see/" target="_blank">seegfui.de/produkt/snapback-cap-starnberger-see/</a>
+        <div class="price-verified">Live: slug snapback-cap-starnberger-see → 3490 Ct = 34,90 € (geprüft: 2026-10-17 09:00)</div>
+      </div>
+      <div class="caption-box">Wochenende am Starnberger See — die Cap sitzt, der See glänzt. ⛵️
+
+Ob Seepromenade, Radln oder einfach am Ufer sitzen: mit dem Seegfui Cap bist du immer als echter Seemensch erkennbar.
+
+Snapback Cap Starnberger See – 34,90 €
+Weil der See-Style auch im Herbst zählt. 🧢
+
+🛒 seegfui.de?utm_source=instagram&amp;utm_medium=post&amp;utm_campaign=seemensch | Link in Bio
+
+#starnbergersee #snapbackcap #seegfui #seemensch #fünfseenland #bayernlake #capstyle #bayerischermeer #lakelife #seegefuehl
+
+🤖 KI-erstellt</div>
+      <ul class="checklist">
+        <li>Caption: kein Bio-Claim ✓</li>
+        <li>aiLabel: required — <code>🤖 KI-erstellt</code> in Caption ✓</li>
+        <li class="warn">Lifestyle-Bild: offen → KreativAgent SEE-11309</li>
+      </ul>
+      <div class="dep-row">⚠️ Blockiert bis Lifestyle-Bild fertig — KreativAgent SEE-11309, Deadline 22.10. 22:00</div>
+    </div>
+  </div>
+
+</div><!-- end posts-grid -->
+
+<!-- ADS BLOCK -->
+<div class="section-title">💰 Bezahlte Ads (Meta + Google)</div>
+<div class="ads-block">
+  <h2>Ads-Übersicht KW43</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>Kampagne</th>
+        <th>Status</th>
+        <th>Budget</th>
+        <th>Hinweis</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Seegfui-Sales-Regional (Meta Ads, SEE-4330)</td>
+        <td><span class="badge badge-warn">⏸ Paused</span></td>
+        <td>—</td>
+        <td>Weiterhin pausiert (Board-Direktive §2.4). Kein Spend-Request für KW43.</td>
+      </tr>
+    </tbody>
+  </table>
+  <p style="margin-top:14px;font-size:0.84rem;color:#666;">
+    ✅ <strong>Spend-Gate:</strong> Kein neues Ad-Budget für KW43 beantragt. Keine CEO-Freigabe erforderlich.
+    Gesamtbudget KW43: <strong>0 €/Tag</strong>.
+  </p>
+</div>
+
+<!-- PRICE VERIFICATION LOG -->
+<div class="section-title">🏷️ Preisverifizierung (§3 Live-Preis-Pflicht)</div>
+<div class="ads-block">
+  <table>
+    <thead>
+      <tr><th>Slug</th><th>Preis (Cent)</th><th>Preis (EUR)</th><th>Geprüft</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>seehnsucht-starnberger-see-unisex-hoodie</td><td>6390</td><td>63,90 €</td><td>2026-10-17 09:00 CEST</td></tr>
+      <tr><td>am-see-dahoam-ammersee-damen-tailliert-organic-t-shirt</td><td>3490</td><td>34,90 €</td><td>2026-10-17 09:00 CEST</td></tr>
+      <tr><td>seehnsucht-ammersee-unisex-hoodie</td><td>6390</td><td>63,90 €</td><td>2026-10-17 09:00 CEST</td></tr>
+      <tr><td>snapback-cap-starnberger-see</td><td>3490</td><td>34,90 €</td><td>2026-10-17 09:00 CEST</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<footer>
+  Seegfui Wochenplan KW43 · CMO · 2026-10-17 · <a href="https://seegfui.de" style="color:#1a6e8a">seegfui.de</a>
+</footer>
+
+</body>
+</html>
