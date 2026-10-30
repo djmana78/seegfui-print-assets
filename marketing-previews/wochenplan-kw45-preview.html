@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Seegfui Wochenplan KW45 – 2. Nov – 7. Nov 2026</title>
+<style>
+  :root {
+    --see-blau: #1a6e8a;
+    --see-blau-hell: #e8f4f8;
+    --gruen: #2d7a47;
+    --gruen-hell: #e8f5ee;
+    --orange: #c75e1a;
+    --rot: #b91c1c;
+    --rot-hell: #fde8e8;
+    --grau: #444;
+    --border: #ddd;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    background: #f0f2f5;
+    color: #222;
+    padding: 24px 16px;
+  }
+  header {
+    max-width: 1060px;
+    margin: 0 auto 32px;
+    background: var(--see-blau);
+    color: white;
+    padding: 28px 32px;
+    border-radius: 12px;
+  }
+  header h1 { font-size: 1.6rem; margin-bottom: 6px; }
+  header p { opacity: 0.85; font-size: 0.95rem; }
+  .badge {
+    display: inline-block;
+    padding: 3px 10px;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    margin-right: 6px;
+  }
+  .badge-organisch { background: #d4edda; color: #155724; }
+  .badge-ig { background: #e1306c; color: white; }
+  .badge-fb { background: #1877f2; color: white; }
+  .badge-ki { background: #fff3cd; color: #856404; }
+  .badge-warn { background: #fde8e8; color: var(--rot); }
+  .section-title {
+    max-width: 1060px;
+    margin: 0 auto 16px;
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--grau);
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    padding-left: 4px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .posts-grid {
+    max-width: 1060px;
+    margin: 0 auto 40px;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 18px;
+  }
+  .post-card {
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    display: flex;
+    flex-direction: column;
+  }
+  .post-card.blocked { border: 2px solid var(--orange); }
+  .post-card .image-wrap {
+    position: relative;
+    height: 260px;
+    background: #f5f5f5;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .post-card .image-wrap img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .post-card .image-wrap .placeholder {
+    text-align: center;
+    padding: 20px;
+    color: #888;
+  }
+  .post-card .image-wrap .placeholder .icon { font-size: 2.5rem; margin-bottom: 8px; }
+  .post-card .image-wrap .placeholder .label { font-size: 0.82rem; font-weight: 600; color: var(--orange); }
+  .post-card .image-wrap .placeholder .sub { font-size: 0.75rem; margin-top: 4px; color: #aaa; }
+  .post-card .image-wrap .date-chip {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    background: rgba(0,0,0,0.65);
+    color: white;
+    border-radius: 6px;
+    padding: 4px 10px;
+    font-size: 0.78rem;
+    font-weight: 600;
+  }
+  .post-card .image-wrap .channel-chips {
+    position: absolute;
+    bottom: 12px;
+    right: 12px;
+    display: flex;
+    gap: 5px;
+  }
+  .post-card .body {
+    padding: 14px 16px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .post-card .product-name {
+    font-weight: 700;
+    font-size: 0.92rem;
+    color: var(--see-blau);
+    line-height: 1.3;
+  }
+  .post-card .price-line {
+    font-size: 0.85rem;
+    color: #555;
+  }
+  .post-card .price-line a {
+    color: var(--see-blau);
+    text-decoration: none;
+  }
+  .post-card .caption-box {
+    background: #f7f9fc;
+    border-left: 3px solid var(--see-blau);
+    padding: 10px 12px;
+    font-size: 0.82rem;
+    line-height: 1.5;
+    color: #333;
+    white-space: pre-wrap;
+    word-break: break-word;
+  }
+  .post-card .meta-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    align-items: center;
+  }
+  .post-card .check-list {
+    font-size: 0.78rem;
+    color: #555;
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+  }
+  .post-card .check-list .ok { color: var(--gruen); }
+  .post-card .check-list .warn { color: var(--orange); }
+  .post-card .check-list .blocked-note { color: var(--rot); font-weight: 600; }
+  .ads-box {
+    max-width: 1060px;
+    margin: 0 auto 40px;
+    background: white;
+    border-radius: 12px;
+    padding: 24px 28px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  }
+  .ads-box h3 { font-size: 1rem; margin-bottom: 14px; color: var(--grau); }
+  .ads-box table { width: 100%; border-collapse: collapse; font-size: 0.86rem; }
+  .ads-box th { text-align: left; padding: 8px 10px; background: #f0f2f5; color: #555; font-weight: 600; }
+  .ads-box td { padding: 8px 10px; border-top: 1px solid var(--border); }
+  .preise-box {
+    max-width: 1060px;
+    margin: 0 auto 40px;
+    background: white;
+    border-radius: 12px;
+    padding: 20px 24px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    font-size: 0.86rem;
+    color: #555;
+  }
+  .preise-box h3 { font-size: 0.9rem; font-weight: 700; margin-bottom: 10px; color: var(--grau); }
+  .preise-box code { background: #f0f2f5; padding: 2px 6px; border-radius: 4px; font-size: 0.82rem; }
+  .blocked-banner {
+    max-width: 1060px;
+    margin: 0 auto 24px;
+    background: #fff8f0;
+    border: 2px solid var(--orange);
+    border-radius: 12px;
+    padding: 16px 20px;
+    font-size: 0.88rem;
+    color: var(--orange);
+  }
+  .blocked-banner strong { display: block; margin-bottom: 6px; font-size: 0.95rem; }
+  .footer {
+    max-width: 1060px;
+    margin: 20px auto 0;
+    font-size: 0.78rem;
+    color: #888;
+    text-align: center;
+  }
+</style>
+</head>
+<body>
+<header>
+  <h1>Wochenplan KW45 — 2. Nov – 7. Nov 2026</h1>
+  <p>CMO · Organisch · 4 Posts · Hoodie-Herbst + Mützen-Geschenk + Tasse · Ads PAUSED, 0 € Spend</p>
+  <p style="margin-top:10px; font-size:0.82rem; opacity:0.7">Erstellt: Fr 30.10.2026 · SEE-11697 · Freigabe ausstehend · 2 von 4 Bildern bereit, 2 bei KreativAgent (SEE-11699)</p>
+</header>
+<div class="section-title">📅 Organische Posts (4)</div>
+<div class="posts-grid">
+  <div class="post-card">
+    <div class="image-wrap"><img src="https://cdn.jsdelivr.net/gh/djmana78/seegfui-print-assets@29ac761dc30bf40b753b2e5620ad36b4b3db9e00/social/see11305/kw43-p1-seehnsucht-starnberger-see-hoodie-lifestyle_overlay.png" alt="Seehnsucht – Starnberger See – Unisex Hoodie (Navy)">
+      <div class="date-chip">Mo 02.11. · 18:30</div>
+      <div class="channel-chips"><span class="badge badge-ig">IG</span><span class="badge badge-fb">FB</span></div>
+    </div>
+    <div class="body">
+      <div class="product-name">Seehnsucht – Starnberger See – Unisex Hoodie (Navy)</div>
+      <div class="price-line">63,90 € · <a href="https://seegfui.de/produkt/seehnsucht-starnberger-see-unisex-hoodie/">seegfui.de/produkt/seehnsucht-starnberger-see-unisex-hoodie/</a><br><small style="color:#888">WC 566748 · live geprüft 30.10.2026 · Recycling KW43-P1 (nie veröffentlicht)</small></div>
+      <div class="meta-row"><span class="badge badge-organisch">Organisch</span><span class="badge badge-ki">🤖 KI-erstellt</span><span class="badge badge-ok">Bild bereit</span></div>
+      <div class="caption-box">Schilfufer des Starnberger Sees – der Nebel hängt noch über dem Wasser, der Hoodie hält warm. 🍂🧥
+
+Seehnsucht ist das Gefühl, wenn man schon beim Heimfahren wieder zurück will.
+
+Seehnsucht Starnberger See Hoodie | 63,90 € → seegfui.de/produkt/seehnsucht-starnberger-see-unisex-hoodie/?utm_source=instagram&amp;utm_medium=post&amp;utm_campaign=hoodie-starnberger-kw45
+
+#starnbergersee #seehnsucht #hoodie #herbst #fünfseenland #seegfui #liabzumsee 🤖 KI-erstellt</div>
+      <div class="check-list"><div class="ok">✅ Bild CDN HTTP 200, geliefert SEE-11306, Gates bestanden</div><div class="warn">⚠️ aiLabel required (fal.ai-Szene) – Caption trägt 🤖 KI-erstellt ✓</div><div class="ok">✅ Preis live 6390 Cent = 63,90 €</div><div class="ok">✅ Kein Bio-/Öko-Claim</div></div>
+    </div>
+  </div>
+  <div class="post-card">
+    <div class="image-wrap"><img src="https://cdn.jsdelivr.net/gh/djmana78/seegfui-print-assets@8bf3f0b41dfe3e5390c21bd2832e0c93ead144fc/social/see11659/haubngfui_ammersee_oliv_STAU295-FrenchNavy_overlay.jpg" alt="Haubngfui Geschenk (Carousel, 3 Seen)">
+      <div class="date-chip">Mi 04.11. · 18:30 <small>(vorgezogen von Do 05.11.)</small></div>
+      <div class="channel-chips"><span class="badge badge-ig">IG</span><span class="badge badge-fb">FB</span></div>
+    </div>
+    <div class="body">
+      <div class="product-name">Haubngfui Geschenk (Carousel, 3 Seen)</div>
+      <div class="price-line">Haubngfui Beanies · bereits freigegeben (SEE-11520, 7b4a5f84) – nur Termin Do→Mi</div>
+      <div class="meta-row"><span class="badge badge-organisch">Organisch</span><span class="badge badge-ok">Bild bereit</span><span class="badge badge-organisch">Kein KI-Label nötig</span></div>
+      <div class="caption-box">Caption unverändert wie im freigegebenen Mützen-Plan (SEE-11429 rev6, Slot muetzen-w1-m6): „Für Menschen, die ihren See lieben“ – Carousel Ammersee Oliv · Starnberger See See-Blau · Tegernsee See-Grün.<br><small>Weitere Carousel-Bilder: <a href='https://cdn.jsdelivr.net/gh/djmana78/seegfui-print-assets@8bf3f0b41dfe3e5390c21bd2832e0c93ead144fc/social/see11659/haubngfui_starnberger-see_see-blau_STAU295-FrenchNavy_overlay.jpg'>Starnberger See</a> · <a href='https://cdn.jsdelivr.net/gh/djmana78/seegfui-print-assets@8bf3f0b41dfe3e5390c21bd2832e0c93ead144fc/social/see11659/haubngfui_tegernsee_see-gruen_STAU295-FrenchNavy_overlay.jpg'>Tegernsee</a></small></div>
+      <div class="check-list"><div class="ok">✅ Weiße Shop-Eigenbilder (Printful-Rendering), aiLabel not-required</div><div class="ok">✅ Inhalt schon freigegeben – nur Terminverschiebung zur Bestätigung</div><div class="ok">✅ Kein Bio-/Öko-Claim</div></div>
+    </div>
+  </div>
+  <div class="post-card">
+    <div class="image-wrap"><div class="placeholder">Bild folgt (SEE-11699, KreativAgent, Deadline Mi 04.11.)</div>
+      <div class="date-chip">Fr 06.11. · 18:30</div>
+      <div class="channel-chips"><span class="badge badge-ig">IG</span><span class="badge badge-fb">FB</span></div>
+    </div>
+    <div class="body">
+      <div class="product-name">Seehnsucht – Tegernsee – Unisex Hoodie</div>
+      <div class="price-line">63,90 € · <a href="https://seegfui.de/produkt/seehnsucht-tegernsee-unisex-hoodie/">seegfui.de/produkt/seehnsucht-tegernsee-unisex-hoodie/</a><br><small style="color:#888">WC 567229 · live geprüft 30.10.2026</small></div>
+      <div class="meta-row"><span class="badge badge-organisch">Organisch</span><span class="badge badge-ki">🤖 KI-erstellt</span><span class="badge badge-warn">Bild offen</span></div>
+      <div class="caption-box">Tegernsee im November: klar, kalt, still. 🍂
+
+Am Ufer reicht ein Hoodie – und das Gefühl, dass man genau hier hingehört.
+
+Seehnsucht Tegernsee Hoodie | 63,90 € → seegfui.de/produkt/seehnsucht-tegernsee-unisex-hoodie/?utm_source=instagram&amp;utm_medium=post&amp;utm_campaign=hoodie-tegernsee-kw45
+
+#tegernsee #seehnsucht #hoodie #herbst #fünfseenland #seegfui #liabzumsee 🤖 KI-erstellt</div>
+      <div class="check-list"><div class="warn">⏳ Bild offen → KreativAgent SEE-11699 (Deadline Mi 04.11.). Ohne Lieferung: Slot entfällt, kein Platzhalter-Post</div><div class="warn">⚠️ aiLabel voraussichtlich required (Generierung) – final nach Lieferung; Caption trägt Label</div><div class="ok">✅ Preis live 63,90 €</div><div class="ok">✅ Kein Bio-/Öko-Claim</div></div>
+    </div>
+  </div>
+  <div class="post-card">
+    <div class="image-wrap"><div class="placeholder">Bild folgt (SEE-11699, KreativAgent, Deadline Mi 04.11.)</div>
+      <div class="date-chip">Sa 07.11. · 11:00</div>
+      <div class="channel-chips"><span class="badge badge-ig">IG</span><span class="badge badge-fb">FB</span></div>
+    </div>
+    <div class="body">
+      <div class="product-name">Sonnengfui Starnberger See – Emaille-Tasse</div>
+      <div class="price-line">19,90 € · <a href="https://seegfui.de/produkt/sonnengfui-starnberger-see-emaille-tasse/">seegfui.de/produkt/sonnengfui-starnberger-see-emaille-tasse/</a><br><small style="color:#888">WC 573305 · live geprüft 30.10.2026</small></div>
+      <div class="meta-row"><span class="badge badge-organisch">Organisch</span><span class="badge badge-ki">🤖 KI-erstellt</span><span class="badge badge-warn">Bild offen</span></div>
+      <div class="caption-box">Samstagvormittag, heißer Kaffee, Blick auf den Starnberger See. ☕🍂
+
+Die Sonnengfui-Emaille-Tasse: robust, zeitlos, für Dich oder als Geschenk.
+
+Sonnengfui Starnberger See Emaille-Tasse | 19,90 € → seegfui.de/produkt/sonnengfui-starnberger-see-emaille-tasse/?utm_source=instagram&amp;utm_medium=post&amp;utm_campaign=tasse-starnberger-kw45
+
+#starnbergersee #sonnengfui #emaille #tasse #geschenkidee #fünfseenland #seegfui #liabzumsee 🤖 KI-erstellt</div>
+      <div class="check-list"><div class="warn">⏳ Bild offen → KreativAgent SEE-11699 (Deadline Mi 04.11.). Ohne Lieferung: Slot entfällt</div><div class="warn">⚠️ aiLabel voraussichtlich required – final nach Lieferung</div><div class="ok">✅ Preis live 19,90 €</div><div class="ok">✅ Kein Bio-/Öko-Claim</div></div>
+    </div>
+  </div>
+</div>
+<div class="section-title">💰 Paid Ads (KW45)</div>
+<div class="ads-box">
+  <h3>Meta Ads — Status KW45</h3>
+  <table><thead><tr><th>Kampagne</th><th>Status</th><th>Budget</th><th>Begründung</th></tr></thead><tbody>
+  <tr><td>Seegfui-Sales-Regional</td><td><strong style="color: var(--orange)">NICHT GENEHMIGT / PAUSED</strong></td><td>0 € neu (55,04 € geparkt)</td><td>Board-Entscheid: erst Vertrauen/Conversion aufbauen. Kein Restart ohne neue CEO-Freigabe.</td></tr>
+  </tbody></table>
+  <p style="margin-top:14px;font-size:0.83rem;color:#777;">Kein Ad-Spend in KW45. Restart-Kriterien: Conversion-Optimierung · Trust-Signale/UGC · Retargeting-Audience · Creative mit Preis-Anker.</p>
+</div>
+<div class="footer">Seegfui KW45 Wochenplan · CMO · SEE-11697 · Erstellt 30.10.2026 · Freigabe durch CEO (Peter) erforderlich</div>
+</body>
+</html>
